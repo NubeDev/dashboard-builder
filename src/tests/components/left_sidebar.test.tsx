@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react'
 
 import configureStore from 'redux-mock-store'
 
-import LeftSidebar from 'src/components/builder/leftSidebar/LeftSidebar'
+import LeftSidebar from 'src/components/builder/LeftSidebar/LeftSidebar'
 
 // Configure a mock store
 const mockStore = configureStore([])

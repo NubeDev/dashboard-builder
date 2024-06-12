@@ -3,7 +3,7 @@ import { cn } from 'src/shadcn/lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import React from 'react'
 
-import { ScrollArea } from './scroll_area'
+import { ScrollArea } from './scroll-area'
 import { DragItemModel, RowModel } from 'src/libs/models'
 import { ChevronRight, LucideIcon } from 'lucide-react'
 

@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from 'src/shadcn/components/ui/dropdown_menu'
+} from 'src/shadcn/components/ui/dropdown-menu'
 import { Separator } from 'src/shadcn/components/ui/separator'
 
 export default function DemoGithub() {

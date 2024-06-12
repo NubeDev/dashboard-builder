@@ -7,7 +7,7 @@ import {
   ContextMenuItem,
   ContextMenuShortcut,
   ContextMenuTrigger
-} from 'src/shadcn/components/ui/context_menu'
+} from 'src/shadcn/components/ui/context-menu'
 
 interface Props<T> {
   children: React.ReactElement

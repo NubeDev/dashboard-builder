@@ -1,7 +1,7 @@
 import { CircleX } from 'lucide-react'
 
 import { cn } from 'src/shadcn/lib/utils'
-import { LIST_ELEMENTS_EXAMPLE } from 'src/config'
+import { LIST_ELEMENTS_EXAMPLE } from 'src/constants'
 import { DragItemModel, ElementModel } from 'src/libs/models'
 
 import PlusElement from 'src/components/common/BlankBlock/PlusElement'

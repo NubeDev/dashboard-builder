@@ -6,21 +6,21 @@ import { ClipboardPaste, Copy, Trash2, Undo2, Redo2 } from 'lucide-react'
 import { RootState } from 'src/store/store'
 import { TreeDataItem } from 'src/shadcn/components/ui/tree'
 import { DragItemModel } from 'src/libs/models'
-import { TempMenuModel, addTempMenu } from 'src/store/temp_list_menus'
+import { TempMenuModel, addTempMenu } from 'src/store/temp-list-menus'
 import {
   addColumnByColumnIdAndColumnElement,
   addColumnByRowIdAndColumnElement,
   addRowByCopy,
   removeElementFromColumnByColumnId,
   removeRow
-} from 'src/store/elements_layout'
+} from 'src/store/elements-layout'
 import {
   ContextMenuContent,
   ContextMenu,
   ContextMenuTrigger,
   ContextMenuItem,
   ContextMenuShortcut
-} from 'src/shadcn/components/ui/context_menu'
+} from 'src/shadcn/components/ui/context-menu'
 
 interface Props {
   children: React.ReactElement

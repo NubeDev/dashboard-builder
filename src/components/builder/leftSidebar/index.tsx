@@ -6,9 +6,8 @@ import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import { Button } from 'src/shadcn/components/ui/button'
-import { addRow } from 'src/store/elements_layout'
+import { addRow } from 'src/store/elements-layout'
 import { ElementModel, RowModel } from 'src/libs/models'
-
 import AddElementExpandingSection from './AddElementExpanding'
 
 const SidebarContainer = styled.aside`

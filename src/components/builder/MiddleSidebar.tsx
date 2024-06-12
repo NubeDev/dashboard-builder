@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { Tree } from 'src/shadcn/components/ui/tree'
 import { RootState } from 'src/store/store'
-import { onFocusToItem } from 'src/store/elements_layout'
+import { onFocusToItem } from 'src/store/elements-layout'
 
 import type { TreeDataItem } from 'src/shadcn/components/ui/tree'
 

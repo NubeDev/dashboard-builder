@@ -1,9 +1,8 @@
 import { CircleX } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
-import { getArrayBooleanByCurrentLayout } from 'src/libs/hooks'
-
 import BlankBlock from 'src/components/common/BlankBlock'
+import { getArrayBooleanByCurrentLayout } from 'src/utils'
 
 type Props = {
   currentLayout: string

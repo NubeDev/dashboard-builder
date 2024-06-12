@@ -2,8 +2,8 @@ import styled from 'styled-components'
 
 import MiddleSidebar from 'src/components/builder/MiddleSidebar'
 import RightContent from 'src/components/builder/RightContent'
-import LeftSidebar from 'src/components/builder/leftSidebar/LeftSidebar'
-import Layout from 'src/components/layout/Layout'
+import LeftSidebar from 'src/components/builder/LeftSidebar'
+import Layout from 'src/components/layout'
 
 const Container = styled.div`
   display: flex;

@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'src/store/store'
 import { DragItemModel, ElementModel, RowModel } from 'src/libs/models'
-import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp_list_components'
-import { addElementToColumn, addRowByCopy, removeElementFromColumn, removeRow } from 'src/store/elements_layout'
+import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
+import { addElementToColumn, addRowByCopy, removeElementFromColumn, removeRow } from 'src/store/elements-layout'
 
 import DragDropItem from '../DragAndDrop/DragDropItem'
 import WrapperRightClick from './WrapperRightClick'

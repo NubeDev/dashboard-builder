@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-import { elementsLayoutSlice } from './elements_layout'
-import { tempListComponentsSlice } from './temp_list_components'
-import { tempListMenusSlice } from './temp_list_menus'
+import { elementsLayoutSlice } from './elements-layout'
+import { tempListComponentsSlice } from './temp-list-components'
+import { tempListMenusSlice } from './temp-list-menus'
 
 export const rootReducer = combineReducers({
   elementsLayout: elementsLayoutSlice.reducer,
