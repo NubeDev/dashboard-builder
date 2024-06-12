@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 import { Button } from 'src/shadcn/components/ui/button'
 import { addRow } from 'src/store/elements-layout'
-import { ElementModel, RowModel } from 'src/libs/models'
+import { ElementModel, RowModel } from 'src/utils/models'
 import AddElementExpandingSection from './AddElementExpanding'
 
 const SidebarContainer = styled.aside`

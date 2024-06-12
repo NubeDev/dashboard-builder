@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { cn } from 'src/shadcn/lib/utils'
 import { TableDemo } from 'src/examples/InvoiceTable'
-import { ElementModel } from 'src/libs/models'
+import { ElementModel } from 'src/utils/models'
 import { CardsCookieSettings } from 'src/examples/CardsCookieSettings'
 
 import PlusElement from './PlusElement'

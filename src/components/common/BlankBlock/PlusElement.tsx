@@ -1,5 +1,5 @@
 import { SquarePlus } from 'lucide-react'
-import { ElementModel } from 'src/libs/models'
+import { ElementModel } from 'src/utils/models'
 import { buttonVariants } from 'src/shadcn/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 'src/shadcn/components/ui/dialog'
 import { cn } from 'src/shadcn/lib/utils'

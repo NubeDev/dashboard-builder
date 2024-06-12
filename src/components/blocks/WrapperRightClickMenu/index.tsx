@@ -5,7 +5,7 @@ import { ClipboardPaste, Copy, Trash2, Undo2, Redo2 } from 'lucide-react'
 
 import { RootState } from 'src/store/store'
 import { TreeDataItem } from 'src/shadcn/components/ui/tree'
-import { DragItemModel } from 'src/libs/models'
+import { DragItemModel } from 'src/utils/models'
 import { TempMenuModel, addTempMenu } from 'src/store/temp-list-menus'
 import {
   addColumnByColumnIdAndColumnElement,

@@ -1,6 +1,6 @@
 import { cn } from 'src/shadcn/lib/utils'
 import { LIST_ROW_LAYOUTS } from 'src/constants'
-import { DragItemModel, ElementModel, RowModel } from 'src/libs/models'
+import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
 
 import SelectLayoutButton from '../DragAndDrop/SelectLayoutButton'
 import WrapperColumnInRow from './WrapperColumnInRow'

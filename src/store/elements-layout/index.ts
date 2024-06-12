@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 
-import { DragItemModel, ElementModel, RowModel } from 'src/libs/models'
+import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
 
 import type { PayloadAction } from '@reduxjs/toolkit'
 

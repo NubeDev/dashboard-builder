@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { DragItemModel, ElementModel, RowModel } from 'src/libs/models'
+import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
 import { addColumnToRow, addElementToColumn, swapElement, removeElementFromColumn } from 'src/store/elements-layout'
 
 import Row from './Row'

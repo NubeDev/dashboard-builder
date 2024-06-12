@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { DragItemModel, RowModel } from 'src/libs/models'
+import { DragItemModel, RowModel } from 'src/utils/models'
 
 export interface TempMenuModel {
   id: string

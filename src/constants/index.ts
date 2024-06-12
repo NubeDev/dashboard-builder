@@ -2,7 +2,7 @@ import { Square } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Row } from 'src/components/blocks'
-import { ElementModel, RowLayoutModel } from 'src/libs/models'
+import { ElementModel, RowLayoutModel } from 'src/utils/models'
 import {
   DivideLayoutFour,
   DivideLayoutOne,

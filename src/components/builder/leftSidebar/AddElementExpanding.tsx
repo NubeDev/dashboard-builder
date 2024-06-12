@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 import { Textarea } from 'src/shadcn/components/ui/textarea'
-import { ElementModel } from 'src/libs/models'
+import { ElementModel } from 'src/utils/models'
 import { Card, CardContent } from 'src/shadcn/components/ui/card'
 import { LIST_CORE_ELEMENTS } from 'src/constants'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from 'src/shadcn/components/ui/tabs'

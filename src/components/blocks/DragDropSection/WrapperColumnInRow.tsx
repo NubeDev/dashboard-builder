@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'src/store/store'
-import { DragItemModel, ElementModel, RowModel } from 'src/libs/models'
+import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
 import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
 import { addElementToColumn, addRowByCopy, removeElementFromColumn, removeRow } from 'src/store/elements-layout'
 

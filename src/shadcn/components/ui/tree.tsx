@@ -4,7 +4,7 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import React from 'react'
 
 import { ScrollArea } from './scroll-area'
-import { DragItemModel, RowModel } from 'src/libs/models'
+import { DragItemModel, RowModel } from 'src/utils/models'
 import { ChevronRight, LucideIcon } from 'lucide-react'
 
 import useResizeObserver from 'use-resize-observer'
