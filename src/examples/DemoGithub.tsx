@@ -12,12 +12,16 @@ import {
 } from 'src/shadcn/components/ui/dropdown-menu'
 import { Separator } from 'src/shadcn/components/ui/separator'
 
-export default function DemoGithub() {
+type Props = {
+  title?: string
+}
+
+export default function DemoGithub({ title }: Props) {
   return (
     <Card>
       <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
         <div className="space-y-1">
-          <CardTitle>shadcn/ui</CardTitle>
+          <CardTitle>{title ? title : 'shadcn/ui'}</CardTitle>
           <CardDescription>
             Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open
             Source.

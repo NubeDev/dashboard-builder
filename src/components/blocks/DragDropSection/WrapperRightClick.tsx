@@ -1,4 +1,4 @@
-import { ClipboardPaste, Copy, Trash2, Folders, Trash } from 'lucide-react'
+import { ClipboardPaste, Copy, Trash2, Folders, Trash, FilePenLine } from 'lucide-react'
 
 import { cn } from 'src/shadcn/lib/utils'
 import {
@@ -17,6 +17,7 @@ interface Props<T> {
   className?: string
   onCopyRow: (item: T) => void
   onCopyColumn: (item: T, action: string) => void
+  onEdit: (item: T) => void
   onPaste: (item: T) => void
   onDeleteColumn: (item: T) => void
   onDeleteRow: () => void
@@ -25,9 +26,7 @@ interface Props<T> {
 const WrapperRightClick = <T,>(props: Props<T>) => {
   return (
     <ContextMenu>
-      <ContextMenuTrigger className={cn('w-full', props.className && props.className)}>
-        {props.children}
-      </ContextMenuTrigger>
+      <ContextMenuTrigger className={cn('w-full', props.className)}>{props.children}</ContextMenuTrigger>
       <ContextMenuContent className="w-64">
         <ContextMenuItem onSelect={() => props.onCopyRow(props.item)}>
           Copy row
@@ -44,6 +43,12 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
           Copy component
           <ContextMenuShortcut>
             <Copy className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem onSelect={() => props.onEdit(props.item)}>
+          Edit
+          <ContextMenuShortcut>
+            <FilePenLine className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem

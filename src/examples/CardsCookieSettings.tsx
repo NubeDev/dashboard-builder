@@ -3,11 +3,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from 'src/shadcn/components/ui/label'
 import { Switch } from 'src/shadcn/components/ui/switch'
 
-export function CardsCookieSettings() {
+type Props = {
+  title?: string
+}
+
+export function CardsCookieSettings({ title }: Props) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Cookie Settings</CardTitle>
+        <CardTitle>{title ? title : 'Cookie Settings'}</CardTitle>
         <CardDescription>Manage your cookie settings here.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">

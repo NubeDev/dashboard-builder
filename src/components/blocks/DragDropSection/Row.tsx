@@ -4,6 +4,7 @@ import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
 
 import SelectLayoutButton from '../DragAndDrop/SelectLayoutButton'
 import WrapperColumnInRow from './WrapperColumnInRow'
+import WrapperRightClickRow from '../WrapperRightClickRow'
 
 type Props = {
   rowItem: RowModel
@@ -48,14 +49,16 @@ const Row: React.FC<Props> = ({ rowItem, onAdColumn, onSelectElement, onDrag, on
       )}
     >
       {rowItem.column?.length > 0 ? (
-        <WrapperColumnInRow
-          items={rowItem.column}
-          row={rowItem}
-          onSelectElement={handleSelectElement}
-          onDrag={handleDrag}
-          onDrop={handleDrop}
-          onRemove={handleRemoveElement}
-        />
+        <WrapperRightClickRow>
+          <WrapperColumnInRow
+            items={rowItem.column}
+            row={rowItem}
+            onSelectElement={handleSelectElement}
+            onDrag={handleDrag}
+            onDrop={handleDrop}
+            onRemove={handleRemoveElement}
+          />
+        </WrapperRightClickRow>
       ) : (
         <div className="flex items-center justify-center h-24">
           <SelectLayoutButton onChoseLayout={handleChoseLayout} />

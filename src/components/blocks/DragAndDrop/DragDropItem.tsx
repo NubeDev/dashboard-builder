@@ -46,7 +46,7 @@ const DragDropItem: React.FC<Props> = ({
     <div
       draggable
       className={cn(
-        'w-full cursor-move h-full',
+        'w-full cursor-move h-full shadow-2xl',
         className && className,
         isShowBorder && 'border-r border-sky-300 border-dashed pr-2',
         item.isFocused && 'outline-1 outline outline-sky-500'
@@ -65,7 +65,7 @@ const DragDropItem: React.FC<Props> = ({
           >
             <CircleX className="text-red-600" />
           </button>
-          {item.component && <item.component />}
+          {item.component && <item.component {...item.props} />}
         </div>
       ) : (
         <div className="w-full min-h-24 h-full flex items-center justify-center">

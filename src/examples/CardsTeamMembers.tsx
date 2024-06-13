@@ -12,11 +12,15 @@ import {
 } from 'src/shadcn/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from 'src/shadcn/components/ui/popover'
 
-export function CardsTeamMembers() {
+type Props = {
+  title?: string
+}
+
+export function CardsTeamMembers({ title }: Props) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Team Members</CardTitle>
+        <CardTitle>{title ? title : 'Team Members'}</CardTitle>
         <CardDescription>Invite your team members to collaborate.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">

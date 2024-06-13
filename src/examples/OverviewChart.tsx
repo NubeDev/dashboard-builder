@@ -52,11 +52,15 @@ const data = [
   }
 ]
 
-const OverviewChart = () => {
+type Props = {
+  title?: string
+}
+
+const OverviewChart = ({ title }: Props) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Overview</CardTitle>
+        <CardTitle>{title ? title : 'Overview'}</CardTitle>
       </CardHeader>
       <CardContent className="pl-2">
         <ResponsiveContainer width="100%" height={350}>

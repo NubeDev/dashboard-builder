@@ -149,6 +149,17 @@ export const elementsLayoutSlice = createSlice({
           currentColumn.component = undefined
         }
       }
+    },
+    changeComponentPropByColumnId: (state, action: PayloadAction<DragItemModel>) => {
+      const currentRow = state.listElements.find(row => row.column?.find(col => col.id === action.payload.id))
+
+      if (currentRow) {
+        const currentColumnIndex = currentRow.column.findIndex(col => col.id === action.payload.id)
+
+        if (currentColumnIndex !== -1) {
+          currentRow.column[currentColumnIndex] = action.payload
+        }
+      }
     }
   }
 })
@@ -164,6 +175,7 @@ export const {
   addRowByCopy,
   addColumnByRowIdAndColumnElement,
   addColumnByColumnIdAndColumnElement,
-  removeElementFromColumnByColumnId
+  removeElementFromColumnByColumnId,
+  changeComponentPropByColumnId
 } = elementsLayoutSlice.actions
 export default elementsLayoutSlice.reducer

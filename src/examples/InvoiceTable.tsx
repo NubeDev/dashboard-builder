@@ -35,12 +35,16 @@ const invoices = [
   }
 ]
 
-export function TableDemo() {
+type Props = {
+  title?: string
+}
+
+export function TableDemo({ title }: Props) {
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
+          <TableHead className="w-[100px]">{title ? title : 'Invoice'}</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Method</TableHead>
           <TableHead className="text-right">Amount</TableHead>

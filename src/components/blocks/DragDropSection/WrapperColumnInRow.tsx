@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from 'src/store/store'
+import { setCurrentEditComponent } from 'src/store/current-edit-component'
 import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
 import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
 import { addElementToColumn, addRowByCopy, removeElementFromColumn, removeRow } from 'src/store/elements-layout'
@@ -94,11 +95,15 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
     dispatch(removeRow(row.id))
   }
 
+  function handleEdit(d: DragItemModel) {
+    dispatch(setCurrentEditComponent(d))
+  }
+
   const isFullElement = items?.length > 0 && items?.every(e => e.component)
   const isExistCopyComponent = tempComponents.some(e => e.type === 'copy')
 
   return (
-    <div className="w-full flex gap-3 justify-between relative">
+    <div className="w-full flex gap-9 justify-between relative">
       {items.map((e, index) => (
         <WrapperRightClick
           key={e.id}
@@ -108,6 +113,7 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
           className={e.className}
           onCopyColumn={handleCopyColumn}
           onCopyRow={handleCopyRow}
+          onEdit={handleEdit}
           onPaste={handlePaste}
           onDeleteColumn={handleDeleteColumn}
           onDeleteRow={handleDeleteRow}

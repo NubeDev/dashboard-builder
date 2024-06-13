@@ -19,6 +19,7 @@ export interface DragItemModel {
   className?: string
   isFocused?: boolean
   component?: () => JSX.Element
+  props?: any
 }
 
 export interface RowLayoutModel {
