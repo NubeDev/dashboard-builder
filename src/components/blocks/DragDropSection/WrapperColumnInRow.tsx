@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/store/store'
 import { setCurrentEditComponent } from 'src/store/current-edit-component'
 import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
+import { addElementToColumn, removeElementFromColumn } from 'src/store/elements-layout'
 import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
-import { addElementToColumn, addRowByCopy, removeElementFromColumn, removeRow } from 'src/store/elements-layout'
 
 import DragDropItem from '../DragAndDrop/DragDropItem'
 import WrapperRightClick from './WrapperRightClick'
@@ -55,20 +55,19 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
     }
   }
 
-  function handleCopyRow(d: DragItemModel) {
-    const tempCopyRow: TempComponentsModel = {
-      id: d.id,
-      rowId: row.id,
-      type: 'copy',
-      time: new Date().toISOString(),
-      from: 'row'
-    }
-    dispatch(addCopyToTempList(tempCopyRow))
-  }
+  // function handleCopyRow(d: DragItemModel) {
+  //   const tempCopyRow: TempComponentsModel = {
+  //     id: d.id,
+  //     rowId: row.id,
+  //     type: 'copy',
+  //     time: new Date().toISOString(),
+  //     from: 'row'
+  //   }
+  //   dispatch(addCopyToTempList(tempCopyRow))
+  // }
 
   function handlePaste(d: DragItemModel) {
     const copyComponent = tempComponents.find(t => t.type === 'copy' && t.from === 'column')
-    const copyRow = tempComponents.find(t => t.type === 'copy' && t.from === 'row')
 
     if (copyComponent) {
       const tempElementCopy: ElementModel = {
@@ -80,10 +79,6 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
       dispatch(addElementToColumn({ rowId: row.id, columnId: d.id, ele: tempElementCopy }))
     }
 
-    if (copyRow) {
-      dispatch(addRowByCopy({ rowId: row.id, copyRowId: copyRow.rowId }))
-    }
-
     dispatch(removeCopyFromTempList())
   }
 
@@ -91,15 +86,14 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
     dispatch(removeElementFromColumn({ rowId: row.id, columnId: d.id }))
   }
 
-  function handleDeleteRow() {
-    dispatch(removeRow(row.id))
-  }
+  // function handleDeleteRow() {
+  //   dispatch(removeRow(row.id))
+  // }
 
   function handleEdit(d: DragItemModel) {
     dispatch(setCurrentEditComponent(d))
   }
 
-  const isFullElement = items?.length > 0 && items?.every(e => e.component)
   const isExistCopyComponent = tempComponents.some(e => e.type === 'copy')
 
   return (
@@ -112,15 +106,12 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
           isDisabledPaste={!isExistCopyComponent}
           className={e.className}
           onCopyColumn={handleCopyColumn}
-          onCopyRow={handleCopyRow}
           onEdit={handleEdit}
           onPaste={handlePaste}
           onDeleteColumn={handleDeleteColumn}
-          onDeleteRow={handleDeleteRow}
         >
           <DragDropItem
             item={e}
-            isShowBorder={items?.length - 1 !== index && !isFullElement}
             onDragStart={handleDrag}
             onDropEnd={handleDrop}
             onSelectedElement={handleSelectElement}

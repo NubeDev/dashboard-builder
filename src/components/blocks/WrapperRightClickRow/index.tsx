@@ -1,5 +1,10 @@
-import { CopyPlus, Folders, Trash2 } from 'lucide-react'
+import { useDispatch, useSelector } from 'react-redux'
+import { ClipboardPaste, CopyPlus, Folders, Trash2 } from 'lucide-react'
 
+import { RowModel } from 'src/utils/models'
+import { RootState } from 'src/store/store'
+import { addRowByCopy, removeRow } from 'src/store/elements-layout'
+import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -10,27 +15,68 @@ import {
 
 interface Props {
   children: React.ReactElement
+  currentRow: RowModel
 }
 
-const WrapperRightClickRow = ({ children }: Props) => {
+const WrapperRightClickRow = ({ children, currentRow }: Props) => {
+  // const
+  const dispatch = useDispatch()
+  const tempComponents = useSelector((state: RootState) => state.tempListComponents.listTempComponents)
+  const disabledPaste = tempComponents.find(t => t.type === 'copy' && t.from === 'row') ? false : true
+
+  // functions
+  const handleCopyRow = () => {
+    const tempCopyRow: TempComponentsModel = {
+      id: currentRow.id,
+      rowId: currentRow.id,
+      type: 'copy',
+      time: new Date().toISOString(),
+      from: 'row'
+    }
+    dispatch(addCopyToTempList(tempCopyRow))
+  }
+
+  const handlePasteRow = () => {
+    const copyRow = tempComponents.find(t => t.type === 'copy' && t.from === 'row')
+
+    if (copyRow) {
+      dispatch(addRowByCopy({ rowId: currentRow.id, copyRowId: copyRow.rowId }))
+      dispatch(removeCopyFromTempList())
+    }
+  }
+
+  const handleDeleteRow = () => {
+    dispatch(removeRow(currentRow.id))
+  }
+
+  const handleDuplicateRow = () => {
+    dispatch(addRowByCopy({ rowId: currentRow.id, copyRowId: currentRow.id }))
+  }
+
   return (
     <ContextMenu>
       <ContextMenuTrigger>{children}</ContextMenuTrigger>
       <ContextMenuContent className="w-64">
-        <ContextMenuItem>
-          Copy row
+        <ContextMenuItem onSelect={handleCopyRow}>
+          Copy
           <ContextMenuShortcut>
             <Folders className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem>
+        <ContextMenuItem disabled={disabledPaste} onSelect={handlePasteRow}>
+          Paste
+          <ContextMenuShortcut>
+            <ClipboardPaste className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem onSelect={handleDuplicateRow}>
           Duplicate
           <ContextMenuShortcut>
             <CopyPlus className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem>
-          Delete row
+        <ContextMenuItem onSelect={handleDeleteRow}>
+          Delete
           <ContextMenuShortcut>
             <Trash2 className="size-4" />
           </ContextMenuShortcut>

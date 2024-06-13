@@ -41,30 +41,30 @@ const Row: React.FC<Props> = ({ rowItem, onAdColumn, onSelectElement, onDrag, on
   }
 
   return (
-    <div
-      className={cn(
-        'px-4 py-2 relative overflow-hidden group/item',
-        rowItem.isFocused && 'outline-1 outline outline-sky-500',
-        !rowItem.isFocused && 'border border-gray-400 border-dashed'
-      )}
-    >
-      {rowItem.column?.length > 0 ? (
-        <WrapperRightClickRow>
+    <WrapperRightClickRow currentRow={rowItem}>
+      <div
+        className={cn(
+          'px-4 py-2 relative overflow-hidden group/item mb-4',
+          rowItem.isFocused && 'outline-1 outline outline-sky-500',
+          !rowItem.isFocused && 'border border-gray-400 border-dashed'
+        )}
+      >
+        {rowItem.column?.length > 0 ? (
           <WrapperColumnInRow
-            items={rowItem.column}
             row={rowItem}
-            onSelectElement={handleSelectElement}
+            items={rowItem.column}
             onDrag={handleDrag}
             onDrop={handleDrop}
             onRemove={handleRemoveElement}
+            onSelectElement={handleSelectElement}
           />
-        </WrapperRightClickRow>
-      ) : (
-        <div className="flex items-center justify-center h-24">
-          <SelectLayoutButton onChoseLayout={handleChoseLayout} />
-        </div>
-      )}
-    </div>
+        ) : (
+          <div className="flex items-center justify-center h-24">
+            <SelectLayoutButton onChoseLayout={handleChoseLayout} />
+          </div>
+        )}
+      </div>
+    </WrapperRightClickRow>
   )
 }
 

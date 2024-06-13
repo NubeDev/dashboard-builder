@@ -9,7 +9,6 @@ import { DragItemModel, ElementModel } from 'src/utils/models'
 type Props = {
   item: DragItemModel
   className?: string
-  isShowBorder?: boolean
   onSelectedElement: (element: ElementModel, id: string) => void
   onRemoveElement: (id: string) => void
   onDragStart: (id: string) => void
@@ -18,7 +17,6 @@ type Props = {
 
 const DragDropItem: React.FC<Props> = ({
   item,
-  isShowBorder = false,
   className,
   onDragStart,
   onDropEnd,
@@ -46,9 +44,8 @@ const DragDropItem: React.FC<Props> = ({
     <div
       draggable
       className={cn(
-        'w-full cursor-move h-full shadow-2xl',
+        'w-full cursor-move h-full shadow-column-sm',
         className && className,
-        isShowBorder && 'border-r border-sky-300 border-dashed pr-2',
         item.isFocused && 'outline-1 outline outline-sky-500'
       )}
       onDragStart={handleDragStart}
