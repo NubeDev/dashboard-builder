@@ -37,4 +37,5 @@ export interface RowModel {
   parentId?: string
   position?: string
   isFocused?: boolean
+  currentLayout?: string
 }

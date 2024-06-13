@@ -24,9 +24,13 @@ export const elementsLayoutSlice = createSlice({
     removeRow: (state, action: PayloadAction<string>) => {
       state.listElements = state.listElements.filter(element => element.id !== action.payload)
     },
-    addColumnToRow: (state, action: PayloadAction<{ rowId: string; listColumn: DragItemModel[] }>) => {
+    addColumnToRow: (
+      state,
+      action: PayloadAction<{ rowId: string; listColumn: DragItemModel[]; currentLayout: string }>
+    ) => {
       const currentRow = state.listElements.find(row => row.id === action.payload.rowId)
       if (currentRow) {
+        currentRow.currentLayout = action.payload.currentLayout
         currentRow.column = action.payload.listColumn
       }
     },
@@ -175,6 +179,30 @@ export const elementsLayoutSlice = createSlice({
 
         currentRow.column.splice(currentColumnIndex + 1, 0, { ...action.payload, id: uuidv4() })
       }
+    },
+    changeRowLayout: (state, action: PayloadAction<{ rowId: string; newListColumns: DragItemModel[] }>) => {
+      const { rowId, newListColumns } = action.payload
+      const currentRowIndex = state.listElements.findIndex(row => row.id === rowId)
+
+      if (currentRowIndex !== -1) {
+        const updateRow = { ...state.listElements[currentRowIndex] }
+        const updateColumns = newListColumns.map((newCol, index) => {
+          const oldCol = updateRow.column[index]
+
+          if (oldCol && oldCol.component) {
+            return { ...newCol, component: oldCol.component }
+          } else {
+            return { ...newCol }
+          }
+        })
+
+        updateRow.column = updateColumns
+
+        const updatedListElements = [...state.listElements]
+        updatedListElements[currentRowIndex] = updateRow
+
+        state.listElements = updatedListElements
+      }
     }
   }
 })
@@ -192,6 +220,7 @@ export const {
   changeComponentPropByColumnId,
   addColumnByRowIdAndColumnElement,
   removeElementFromColumnByColumnId,
-  addColumnByColumnIdAndColumnElement
+  addColumnByColumnIdAndColumnElement,
+  changeRowLayout
 } = elementsLayoutSlice.actions
 export default elementsLayoutSlice.reducer

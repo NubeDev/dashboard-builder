@@ -16,9 +16,10 @@ import {
 interface Props {
   children: React.ReactElement
   currentRow: RowModel
+  onEdit: () => void
 }
 
-const WrapperRightClickRow = ({ children, currentRow }: Props) => {
+const WrapperRightClickRow = ({ children, currentRow, onEdit }: Props) => {
   // const
   const dispatch = useDispatch()
   const tempComponents = useSelector((state: RootState) => state.tempListComponents.listTempComponents)
@@ -54,7 +55,7 @@ const WrapperRightClickRow = ({ children, currentRow }: Props) => {
   }
 
   const handleEditRow = () => {
-    console.log('edit row')
+    onEdit()
   }
 
   const disabledEditRow = !currentRow.column || currentRow.column.length === 0

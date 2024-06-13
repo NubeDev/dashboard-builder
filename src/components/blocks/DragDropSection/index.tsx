@@ -18,8 +18,8 @@ const DragDropSection: React.FC<Props> = ({ listRows }) => {
   const [dragId, setDragId] = useState<{ rowId: string; columnId: string } | null>(null)
 
   // functions
-  const handleAddColumn = (rowId: string, listColumn: DragItemModel[]) => {
-    dispatch(addColumnToRow({ rowId, listColumn }))
+  const handleAddColumn = (rowId: string, listColumn: DragItemModel[], currentLayout: string) => {
+    dispatch(addColumnToRow({ rowId, listColumn, currentLayout }))
   }
 
   const handleSelectElement = (rowId: string, columnId: string, element: ElementModel) => {
