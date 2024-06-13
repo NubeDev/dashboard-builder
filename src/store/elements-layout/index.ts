@@ -1,3 +1,4 @@
+import { toast } from 'sonner'
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -160,6 +161,20 @@ export const elementsLayoutSlice = createSlice({
           currentRow.column[currentColumnIndex] = action.payload
         }
       }
+    },
+    addColumnByDuplicate: (state, action: PayloadAction<DragItemModel>) => {
+      const currentRow = state.listElements.find(row => row.column?.find(col => col.id === action.payload.id))
+
+      if (currentRow) {
+        if (currentRow.column.length === 4) {
+          toast.info('Maximum is 4 column.')
+          return
+        }
+
+        const currentColumnIndex = currentRow.column.findIndex(col => col.id === action.payload.id)
+
+        currentRow.column.splice(currentColumnIndex + 1, 0, { ...action.payload, id: uuidv4() })
+      }
     }
   }
 })
@@ -167,15 +182,16 @@ export const elementsLayoutSlice = createSlice({
 export const {
   addRow,
   removeRow,
+  swapElement,
+  addRowByCopy,
+  onFocusToItem,
   addColumnToRow,
   addElementToColumn,
-  swapElement,
+  addColumnByDuplicate,
   removeElementFromColumn,
-  onFocusToItem,
-  addRowByCopy,
+  changeComponentPropByColumnId,
   addColumnByRowIdAndColumnElement,
-  addColumnByColumnIdAndColumnElement,
   removeElementFromColumnByColumnId,
-  changeComponentPropByColumnId
+  addColumnByColumnIdAndColumnElement
 } = elementsLayoutSlice.actions
 export default elementsLayoutSlice.reducer

@@ -44,7 +44,7 @@ const Row: React.FC<Props> = ({ rowItem, onAdColumn, onSelectElement, onDrag, on
     <WrapperRightClickRow currentRow={rowItem}>
       <div
         className={cn(
-          'px-4 py-2 relative overflow-hidden group/item mb-4',
+          'px-8 py-2 relative overflow-hidden group/item mb-4',
           rowItem.isFocused && 'outline-1 outline outline-sky-500',
           !rowItem.isFocused && 'border border-gray-400 border-dashed'
         )}

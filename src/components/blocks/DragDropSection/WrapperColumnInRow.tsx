@@ -55,17 +55,6 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
     }
   }
 
-  // function handleCopyRow(d: DragItemModel) {
-  //   const tempCopyRow: TempComponentsModel = {
-  //     id: d.id,
-  //     rowId: row.id,
-  //     type: 'copy',
-  //     time: new Date().toISOString(),
-  //     from: 'row'
-  //   }
-  //   dispatch(addCopyToTempList(tempCopyRow))
-  // }
-
   function handlePaste(d: DragItemModel) {
     const copyComponent = tempComponents.find(t => t.type === 'copy' && t.from === 'column')
 
@@ -86,10 +75,6 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
     dispatch(removeElementFromColumn({ rowId: row.id, columnId: d.id }))
   }
 
-  // function handleDeleteRow() {
-  //   dispatch(removeRow(row.id))
-  // }
-
   function handleEdit(d: DragItemModel) {
     dispatch(setCurrentEditComponent(d))
   }
@@ -98,7 +83,7 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
 
   return (
     <div className="w-full flex gap-9 justify-between relative">
-      {items.map((e, index) => (
+      {items.map(e => (
         <WrapperRightClick
           key={e.id}
           item={e}

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { ClipboardPaste, CopyPlus, Folders, Trash2 } from 'lucide-react'
+import { ClipboardPaste, CopyPlus, FilePenLine, Folders, Trash2 } from 'lucide-react'
 
 import { RowModel } from 'src/utils/models'
 import { RootState } from 'src/store/store'
@@ -53,6 +53,12 @@ const WrapperRightClickRow = ({ children, currentRow }: Props) => {
     dispatch(addRowByCopy({ rowId: currentRow.id, copyRowId: currentRow.id }))
   }
 
+  const handleEditRow = () => {
+    console.log('edit row')
+  }
+
+  const disabledEditRow = !currentRow.column || currentRow.column.length === 0
+
   return (
     <ContextMenu>
       <ContextMenuTrigger>{children}</ContextMenuTrigger>
@@ -69,6 +75,14 @@ const WrapperRightClickRow = ({ children, currentRow }: Props) => {
             <ClipboardPaste className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
+
+        <ContextMenuItem disabled={disabledEditRow} onSelect={handleEditRow}>
+          Edit
+          <ContextMenuShortcut>
+            <FilePenLine className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
         <ContextMenuItem onSelect={handleDuplicateRow}>
           Duplicate
           <ContextMenuShortcut>

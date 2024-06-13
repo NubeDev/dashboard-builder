@@ -1,6 +1,9 @@
-import { ClipboardPaste, Copy, FilePenLine, Trash } from 'lucide-react'
+import { useDispatch } from 'react-redux'
+import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash } from 'lucide-react'
 
 import { cn } from 'src/shadcn/lib/utils'
+import { DragItemModel } from 'src/utils/models'
+import { addColumnByDuplicate } from 'src/store/elements-layout'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -22,6 +25,15 @@ interface Props<T> {
 }
 
 const WrapperRightClick = <T,>(props: Props<T>) => {
+  // const
+  const dispatch = useDispatch()
+
+  // functions
+  const handleDuplicateRow = () => {
+    console.log(props.item)
+    dispatch(addColumnByDuplicate(props.item as DragItemModel))
+  }
+
   return (
     <ContextMenu>
       <ContextMenuTrigger className={cn('w-full', props.className)}>{props.children}</ContextMenuTrigger>
@@ -52,6 +64,13 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
           Paste
           <ContextMenuShortcut>
             <ClipboardPaste className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
+        <ContextMenuItem disabled={!(props.item as DragItemModel).component} onSelect={handleDuplicateRow}>
+          Duplicate
+          <ContextMenuShortcut>
+            <CopyPlus className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
 
