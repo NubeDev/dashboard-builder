@@ -203,6 +203,18 @@ export const elementsLayoutSlice = createSlice({
 
         state.listElements = updatedListElements
       }
+    },
+    swapRowByRowId: (state, action: PayloadAction<{ fromRowId: string; toRowId: string }>) => {
+      const { fromRowId, toRowId } = action.payload
+
+      const fromRowIndex = state.listElements.findIndex(row => row.id === fromRowId)
+      const toRowIndex = state.listElements.findIndex(row => row.id === toRowId)
+
+      if (fromRowIndex !== -1 && toRowIndex !== -1) {
+        const temp = state.listElements[fromRowIndex]
+        state.listElements[fromRowIndex] = state.listElements[toRowIndex]
+        state.listElements[toRowIndex] = temp
+      }
     }
   }
 })
@@ -221,6 +233,7 @@ export const {
   addColumnByRowIdAndColumnElement,
   removeElementFromColumnByColumnId,
   addColumnByColumnIdAndColumnElement,
-  changeRowLayout
+  changeRowLayout,
+  swapRowByRowId
 } = elementsLayoutSlice.actions
 export default elementsLayoutSlice.reducer

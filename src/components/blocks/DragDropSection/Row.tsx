@@ -13,7 +13,7 @@ type Props = {
   rowItem: RowModel
   onAdColumn: (id: string, listColumn: DragItemModel[], currentLayout: string) => void
   onSelectElement: (rowId: string, columnId: string, element: ElementModel) => void
-  onDrag: (rowId: string, columnId: string) => void
+  onDrag: (rowId: string, columnId: string, fromElement: string) => void
   onDrop: (rowId: string, columnId: string) => void
   onRemoveElement: (rowId: string, columnId: string) => void
 }
@@ -33,7 +33,7 @@ const Row: React.FC<Props> = ({ rowItem, onAdColumn, onSelectElement, onDrag, on
   }
 
   const handleDrag = (columnId: string) => {
-    onDrag(rowItem.id, columnId)
+    onDrag(rowItem.id, columnId, 'column')
   }
 
   const handleDrop = (columnId: string) => {

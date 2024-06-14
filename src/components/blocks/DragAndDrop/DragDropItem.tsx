@@ -24,8 +24,9 @@ const DragDropItem: React.FC<Props> = ({
   onRemoveElement
 }) => {
   // functions
-  const handleDragStart = () => {
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     onDragStart(item.id)
+    e.stopPropagation()
   }
 
   const handleOver = (e: React.DragEvent<HTMLDivElement>) => {
