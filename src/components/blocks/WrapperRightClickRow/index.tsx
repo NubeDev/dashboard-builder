@@ -65,7 +65,7 @@ const WrapperRightClickRow = ({ children, currentRow, onEdit }: Props) => {
       <ContextMenuTrigger>{children}</ContextMenuTrigger>
       <ContextMenuContent className="w-64">
         <ContextMenuItem onSelect={handleCopyRow}>
-          Copy
+          Copy row
           <ContextMenuShortcut>
             <Folders className="size-4" />
           </ContextMenuShortcut>
@@ -78,20 +78,20 @@ const WrapperRightClickRow = ({ children, currentRow, onEdit }: Props) => {
         </ContextMenuItem>
 
         <ContextMenuItem disabled={disabledEditRow} onSelect={handleEditRow}>
-          Edit
+          Edit row
           <ContextMenuShortcut>
             <FilePenLine className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem onSelect={handleDuplicateRow}>
-          Duplicate
+          Duplicate row
           <ContextMenuShortcut>
             <CopyPlus className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem onSelect={handleDeleteRow}>
-          Delete
+          Remove row
           <ContextMenuShortcut>
             <Trash2 className="size-4" />
           </ContextMenuShortcut>

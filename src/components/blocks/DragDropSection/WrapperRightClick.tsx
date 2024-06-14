@@ -44,13 +44,13 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
             props.onCopyColumn && props.onCopyColumn(props.item, 'copy')
           }}
         >
-          Copy
+          Copy component
           <ContextMenuShortcut>
             <Copy className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem onSelect={() => props.onEdit(props.item)}>
-          Edit
+        <ContextMenuItem disabled={!props.isDisabledCopy} onSelect={() => props.onEdit(props.item)}>
+          Edit component
           <ContextMenuShortcut>
             <FilePenLine className="size-4" />
           </ContextMenuShortcut>
@@ -68,14 +68,14 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
         </ContextMenuItem>
 
         <ContextMenuItem disabled={!(props.item as DragItemModel).component} onSelect={handleDuplicateRow}>
-          Duplicate
+          Duplicate component
           <ContextMenuShortcut>
             <CopyPlus className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
 
         <ContextMenuItem disabled={!props.isDisabledCopy} onSelect={() => props.onDeleteColumn(props.item)}>
-          Delete
+          Remove component
           <ContextMenuShortcut>
             <Trash className="size-4" />
           </ContextMenuShortcut>

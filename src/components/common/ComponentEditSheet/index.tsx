@@ -15,7 +15,6 @@ type Props = {
 }
 
 const ComponentEditSheet = ({ isShowSheet, currentComponent, onChange }: Props) => {
-  console.log(currentComponent)
   // const
   const dispatch = useDispatch()
 
