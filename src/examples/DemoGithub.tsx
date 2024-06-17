@@ -16,7 +16,7 @@ type Props = {
   title?: string
 }
 
-export default function DemoGithub({ title }: Props) {
+const DemoGithub = ({ title }: Props) => {
   return (
     <Card>
       <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
@@ -69,3 +69,5 @@ export default function DemoGithub({ title }: Props) {
     </Card>
   )
 }
+
+export default DemoGithub

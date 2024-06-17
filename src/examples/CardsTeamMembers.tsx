@@ -16,7 +16,7 @@ type Props = {
   title?: string
 }
 
-export function CardsTeamMembers({ title }: Props) {
+const CardsTeamMembers = ({ title }: Props) => {
   return (
     <Card>
       <CardHeader>
@@ -118,3 +118,5 @@ export function CardsTeamMembers({ title }: Props) {
     </Card>
   )
 }
+
+export default CardsTeamMembers

@@ -6,7 +6,7 @@ import { Button } from 'src/shadcn/components/ui/button'
 import { cn } from 'src/shadcn/lib/utils'
 import { Calendar } from 'src/shadcn/components/ui/calendar'
 
-export default function DatePickerDemo() {
+const DatePickerDemo = () => {
   const [date, setDate] = React.useState<Date>()
 
   return (
@@ -26,3 +26,5 @@ export default function DatePickerDemo() {
     </Popover>
   )
 }
+
+export default DatePickerDemo

@@ -40,7 +40,7 @@ const data = [
   }
 ]
 
-export default function CardsStats({ title }: Props) {
+export default function CardsStatus({ title }: Props) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
       <Card>

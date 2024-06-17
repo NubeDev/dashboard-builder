@@ -49,7 +49,8 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
         rowId: row.id,
         from: 'column',
         time: new Date().toISOString(),
-        component: d.component
+        component: d.component,
+        componentName: d.name
       }
       dispatch(addCopyToTempList(tempCopyElement))
     }
@@ -62,7 +63,7 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
       const tempElementCopy: ElementModel = {
         name: d.name || '',
         label: d.name || '',
-        element: copyComponent.component || (() => <></>)
+        value: d.name || ''
       }
 
       dispatch(addElementToColumn({ rowId: row.id, columnId: d.id, ele: tempElementCopy }))

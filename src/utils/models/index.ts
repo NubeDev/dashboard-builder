@@ -2,11 +2,9 @@ import { LucideIcon } from 'lucide-react'
 
 export interface ElementModel {
   name: string
-  icon?: LucideIcon
-  type?: string
-  element: () => JSX.Element
   label: string
-  position?: string
+  value: string
+  icon?: LucideIcon
 }
 
 export interface SelectedElementModel extends ElementModel {
@@ -19,6 +17,7 @@ export interface DragItemModel {
   className?: string
   isFocused?: boolean
   component?: () => JSX.Element
+  componentName?: string
   props?: any
 }
 
@@ -38,4 +37,11 @@ export interface RowModel {
   position?: string
   isFocused?: boolean
   currentLayout?: string
+}
+
+export interface UndoRedoModel {
+  id: number
+  type?: 'undo' | 'redo'
+  row: RowModel[]
+  isCurrent: boolean
 }

@@ -2,6 +2,7 @@ import { toast } from 'sonner'
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 
+import { saveCurrentListLayout } from 'src/utils'
 import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
 
 import type { PayloadAction } from '@reduxjs/toolkit'
@@ -19,34 +20,50 @@ export const elementsLayoutSlice = createSlice({
   initialState,
   reducers: {
     addRow: (state, action: PayloadAction<RowModel>) => {
+      const oldList = [...state.listElements]
+      saveCurrentListLayout(oldList)
       state.listElements.push(action.payload)
     },
     removeRow: (state, action: PayloadAction<string>) => {
+      saveCurrentListLayout(state.listElements)
       state.listElements = state.listElements.filter(element => element.id !== action.payload)
     },
     addColumnToRow: (
       state,
       action: PayloadAction<{ rowId: string; listColumn: DragItemModel[]; currentLayout: string }>
     ) => {
-      const currentRow = state.listElements.find(row => row.id === action.payload.rowId)
-      if (currentRow) {
-        currentRow.currentLayout = action.payload.currentLayout
-        currentRow.column = action.payload.listColumn
-      }
+      saveCurrentListLayout(state.listElements)
+      const { rowId, listColumn, currentLayout } = action.payload
+
+      state.listElements = state.listElements.map(row =>
+        row.id === rowId
+          ? {
+              ...row,
+              currentLayout,
+              column: listColumn.map(col => ({ ...col, id: uuidv4() }))
+            }
+          : row
+      )
     },
     addElementToColumn: (state, action: PayloadAction<{ rowId: string; columnId: string; ele: ElementModel }>) => {
-      const currentRow = state.listElements.find(row => row.id === action.payload.rowId)
-      if (currentRow) {
-        const currentColumn = currentRow.column.find(column => column.id === action.payload.columnId)
-        if (currentColumn) {
-          currentColumn.component = action.payload.ele.element
-        }
-      }
+      saveCurrentListLayout(state.listElements)
+
+      const { rowId, columnId, ele } = action.payload
+      state.listElements = state.listElements.map(row =>
+        row.id === rowId
+          ? {
+              ...row,
+              column: row.column.map(col => (col.id === columnId ? { ...col, componentName: ele.value } : col))
+            }
+          : row
+      )
     },
     swapElement: (
       state,
       action: PayloadAction<{ dragRowId: string; dragColumnId: string; dropRowId: string; dropColumnId: string }>
     ) => {
+      saveCurrentListLayout(state.listElements)
+
       const dragRow = state.listElements.find(row => row.id === action.payload.dragRowId)
       const dropRow = state.listElements.find(row => row.id === action.payload.dropRowId)
 
@@ -55,13 +72,15 @@ export const elementsLayoutSlice = createSlice({
         const dropColumn = dropRow.column.find(col => col.id === action.payload.dropColumnId)
 
         if (dragColumn && dropColumn) {
-          const temp = dragColumn.component
-          dragColumn.component = dropColumn.component
-          dropColumn.component = temp
+          const temp = dragColumn.componentName
+          dragColumn.componentName = dropColumn.componentName
+          dropColumn.componentName = temp
         }
       }
     },
     removeElementFromColumn: (state, action: PayloadAction<{ rowId: string; columnId: string }>) => {
+      saveCurrentListLayout(state.listElements)
+
       const currentRow = state.listElements.find(row => row.id === action.payload.rowId)
       if (currentRow) {
         const currentColumn = currentRow.column.find(column => column.id === action.payload.columnId)
@@ -75,6 +94,8 @@ export const elementsLayoutSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; elementType: string; parentId: string | undefined }>
     ) => {
+      saveCurrentListLayout(state.listElements)
+
       state.listElements.forEach(row => {
         row.isFocused = false
         row.column.forEach(col => {
@@ -103,6 +124,8 @@ export const elementsLayoutSlice = createSlice({
       }
     },
     addRowByCopy: (state, action: PayloadAction<{ rowId: string; copyRowId: string }>) => {
+      saveCurrentListLayout(state.listElements)
+
       const currentRowIndex = state.listElements.findIndex(row => row.id === action.payload.rowId)
       const copyCurrentRow = state.listElements.find(row => row.id === action.payload.copyRowId)
 
@@ -117,6 +140,8 @@ export const elementsLayoutSlice = createSlice({
       state,
       action: PayloadAction<{ rowId: string; columnElement: DragItemModel }>
     ) => {
+      saveCurrentListLayout(state.listElements)
+
       const currentRow = state.listElements.find(row => row.id === action.payload.rowId)
 
       if (currentRow && currentRow.column) {
@@ -127,6 +152,8 @@ export const elementsLayoutSlice = createSlice({
       state,
       action: PayloadAction<{ columnId: string; columnElement: DragItemModel }>
     ) => {
+      saveCurrentListLayout(state.listElements)
+
       const currentRowIndex = state.listElements.findIndex(row =>
         row.column?.find(col => col.id === action.payload.columnId)
       )
@@ -145,6 +172,8 @@ export const elementsLayoutSlice = createSlice({
       }
     },
     removeElementFromColumnByColumnId: (state, action: PayloadAction<{ columnId: string }>) => {
+      saveCurrentListLayout(state.listElements)
+
       const currentRow = state.listElements.find(row => row.column?.find(col => col.id === action.payload.columnId))
 
       if (currentRow) {
@@ -156,6 +185,8 @@ export const elementsLayoutSlice = createSlice({
       }
     },
     changeComponentPropByColumnId: (state, action: PayloadAction<DragItemModel>) => {
+      saveCurrentListLayout(state.listElements)
+
       const currentRow = state.listElements.find(row => row.column?.find(col => col.id === action.payload.id))
 
       if (currentRow) {
@@ -167,6 +198,8 @@ export const elementsLayoutSlice = createSlice({
       }
     },
     addColumnByDuplicate: (state, action: PayloadAction<DragItemModel>) => {
+      saveCurrentListLayout(state.listElements)
+
       const currentRow = state.listElements.find(row => row.column?.find(col => col.id === action.payload.id))
 
       if (currentRow) {
@@ -181,6 +214,8 @@ export const elementsLayoutSlice = createSlice({
       }
     },
     changeRowLayout: (state, action: PayloadAction<{ rowId: string; newListColumns: DragItemModel[] }>) => {
+      saveCurrentListLayout(state.listElements)
+
       const { rowId, newListColumns } = action.payload
       const currentRowIndex = state.listElements.findIndex(row => row.id === rowId)
 
@@ -205,6 +240,8 @@ export const elementsLayoutSlice = createSlice({
       }
     },
     swapRowByRowId: (state, action: PayloadAction<{ fromRowId: string; toRowId: string }>) => {
+      saveCurrentListLayout(state.listElements)
+
       const { fromRowId, toRowId } = action.payload
 
       const fromRowIndex = state.listElements.findIndex(row => row.id === fromRowId)
@@ -215,6 +252,9 @@ export const elementsLayoutSlice = createSlice({
         state.listElements[fromRowIndex] = state.listElements[toRowIndex]
         state.listElements[toRowIndex] = temp
       }
+    },
+    handleUndoLayout: (state, action: PayloadAction<RowModel[]>) => {
+      state.listElements = action.payload
     }
   }
 })
@@ -234,6 +274,7 @@ export const {
   removeElementFromColumnByColumnId,
   addColumnByColumnIdAndColumnElement,
   changeRowLayout,
-  swapRowByRowId
+  swapRowByRowId,
+  handleUndoLayout
 } = elementsLayoutSlice.actions
 export default elementsLayoutSlice.reducer

@@ -39,7 +39,7 @@ type Props = {
   title?: string
 }
 
-export function TableDemo({ title }: Props) {
+const TableDemo = ({ title }: Props) => {
   return (
     <Table>
       <TableHeader>
@@ -69,3 +69,5 @@ export function TableDemo({ title }: Props) {
     </Table>
   )
 }
+
+export default TableDemo

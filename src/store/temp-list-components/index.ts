@@ -10,6 +10,7 @@ export interface TempComponentsModel {
   elementId?: string
   time: string
   from: string
+  componentName?: string
   component?: () => JSX.Element
 }
 

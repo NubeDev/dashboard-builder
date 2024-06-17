@@ -2,84 +2,16 @@ import { CircleX } from 'lucide-react'
 import { useState } from 'react'
 
 import { cn } from 'src/shadcn/lib/utils'
-import { TableDemo } from 'src/examples/InvoiceTable'
 import { ElementModel } from 'src/utils/models'
-import { CardsCookieSettings } from 'src/examples/CardsCookieSettings'
+import { LIST_ELEMENTS_EXAMPLE } from 'src/constants'
 
 import PlusElement from './PlusElement'
-import OverviewChart from 'src/examples/OverviewChart'
-import CardsStats from 'src/examples/CardsStats'
-import CardsActivityGoal from 'src/examples/CardsActivityGoal'
-import DemoGithub from 'src/examples/DemoGithub'
-import { CardsTeamMembers } from 'src/examples/CardsTeamMembers'
-import DatePickerDemo from 'src/examples/DatePickerDemo'
-import Logo from '../Logo'
-import Menu from 'src/components/blocks/Headers/Menu'
-import MenuFooter from 'src/components/blocks/Footers/Menu'
 
 type Props = {
   className?: string
   positionIndex: number
   onRemoveOrAddElement?: (index: number, value: boolean) => void
 }
-
-const LIST_ELEMENTS_EXAMPLE: ElementModel[] = [
-  {
-    label: '0',
-    name: 'Logo',
-    element: Logo
-  },
-  {
-    label: '9',
-    name: 'Menu Header',
-    element: Menu
-  },
-  {
-    label: '10',
-    name: 'Menu Footer',
-    element: MenuFooter
-  },
-  {
-    label: '1',
-    name: 'Table',
-    element: TableDemo
-  },
-  {
-    label: '2',
-    name: 'Cookie Settings',
-    element: CardsCookieSettings
-  },
-  {
-    label: '3',
-    name: 'Overview Chart',
-    element: OverviewChart
-  },
-  {
-    label: '4',
-    name: 'Cards Status',
-    element: CardsStats
-  },
-  {
-    label: '5',
-    name: 'Cards Activity Goal',
-    element: CardsActivityGoal
-  },
-  {
-    label: '6',
-    name: 'Demo Github',
-    element: DemoGithub
-  },
-  {
-    label: '7',
-    name: 'Cards Team Members',
-    element: CardsTeamMembers
-  },
-  {
-    label: '8',
-    name: 'Date Picker Demo',
-    element: DatePickerDemo
-  }
-]
 
 const BlankBlock: React.FC<Props> = ({ className = '', positionIndex, onRemoveOrAddElement }) => {
   // state
@@ -104,7 +36,7 @@ const BlankBlock: React.FC<Props> = ({ className = '', positionIndex, onRemoveOr
           >
             <CircleX className="text-red-600" />
           </button>
-          <selectedElement.element />
+          {/* <selectedElement.element /> */}
         </div>
       ) : (
         <div className="w-full min-h-[150px] border border-dashed border-indigo-500 rounded-md flex items-center justify-center">

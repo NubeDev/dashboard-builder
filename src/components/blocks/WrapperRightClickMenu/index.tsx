@@ -68,16 +68,6 @@ const WrapperRightClickMenu = (props: Props) => {
           })
         )
       }
-      // else if (tempCopyItem?.position === 'element') {
-      //   console.log(tempCopyItem)
-      //   console.log(props.item)
-      //   dispatch(
-      //     addColumnByColumnIdAndColumnElement({
-      //       columnId: props.item.parentId as string,
-      //       columnElement: tempCopyItem.tempComponent as DragItemModel
-      //     })
-      //   )
-      // }
     }
   }
 

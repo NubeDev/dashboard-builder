@@ -4,6 +4,7 @@ import { cn } from 'src/shadcn/lib/utils'
 import { LIST_ELEMENTS_EXAMPLE } from 'src/constants'
 
 import PlusElement from 'src/components/common/BlankBlock/PlusElement'
+import { getComponentByName } from 'src/utils'
 import { DragItemModel, ElementModel } from 'src/utils/models'
 
 type Props = {
@@ -41,6 +42,8 @@ const DragDropItem: React.FC<Props> = ({
     onSelectedElement(element, item.id)
   }
 
+  const CurrentComponent = getComponentByName(item.componentName || '')
+
   return (
     <div
       draggable
@@ -53,7 +56,7 @@ const DragDropItem: React.FC<Props> = ({
       onDragOver={handleOver}
       onDrop={handleDropEnd}
     >
-      {item.component ? (
+      {CurrentComponent ? (
         <div className="w-full relative group/close">
           <button
             className="absolute top-2 right-2 z-30 bg-white rounded-full hidden group-hover/close:inline-block transition-all"
@@ -63,7 +66,7 @@ const DragDropItem: React.FC<Props> = ({
           >
             <CircleX className="text-red-600" />
           </button>
-          {item.component && <item.component {...item.props} />}
+          <CurrentComponent {...item.props} />
         </div>
       ) : (
         <div className="w-full min-h-24 h-full flex items-center justify-center">

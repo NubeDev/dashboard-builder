@@ -69,18 +69,8 @@ const AddElementExpandingSection: React.FC<AddElementExpandingProps> = ({ onAddE
         </TabsList>
         <TabsContent value="core">
           <Card className="px-2 py-4">
-            <div className="text-sm font-bold">Header</div>
-            <Nav
-              listBlock={LIST_CORE_ELEMENTS.filter(l => l.position === 'header')}
-              onClickBlock={handleComponentClick}
-            />
-            <div className="text-sm font-bold">Body</div>
-            <Nav listBlock={LIST_CORE_ELEMENTS.filter(l => !l.position)} onClickBlock={handleComponentClick} />
-            <div className="text-sm font-bold">Footer</div>
-            <Nav
-              listBlock={LIST_CORE_ELEMENTS.filter(l => l.position === 'footer')}
-              onClickBlock={handleComponentClick}
-            />
+            <div className="text-sm font-bold">Elements</div>
+            <Nav listBlock={LIST_CORE_ELEMENTS} onClickBlock={handleComponentClick} />
           </Card>
         </TabsContent>
         <TabsContent value="import">

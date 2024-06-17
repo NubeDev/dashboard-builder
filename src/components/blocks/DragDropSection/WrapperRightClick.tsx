@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux'
-import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash } from 'lucide-react'
+import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash, Undo2 } from 'lucide-react'
 
 import { cn } from 'src/shadcn/lib/utils'
 import { DragItemModel } from 'src/utils/models'
-import { addColumnByDuplicate } from 'src/store/elements-layout'
+import { addColumnByDuplicate, handleUndoLayout } from 'src/store/elements-layout'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -11,6 +11,7 @@ import {
   ContextMenuShortcut,
   ContextMenuTrigger
 } from 'src/shadcn/components/ui/context-menu'
+import { getCurrentListLayout } from 'src/utils'
 
 interface Props<T> {
   children: React.ReactElement
@@ -30,8 +31,15 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
 
   // functions
   const handleDuplicateRow = () => {
-    console.log(props.item)
     dispatch(addColumnByDuplicate(props.item as DragItemModel))
+  }
+
+  const handleUndo = () => {
+    const undoListRow = getCurrentListLayout()
+
+    if (undoListRow) {
+      dispatch(handleUndoLayout(undoListRow))
+    }
   }
 
   return (
@@ -55,6 +63,7 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
             <FilePenLine className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
+
         <ContextMenuItem
           disabled={props.isDisabledPaste}
           onSelect={() => {
@@ -64,6 +73,13 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
           Paste
           <ContextMenuShortcut>
             <ClipboardPaste className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
+        <ContextMenuItem onSelect={handleUndo}>
+          Undo
+          <ContextMenuShortcut>
+            <Undo2 className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
 

@@ -10,7 +10,7 @@ type Props = {
 }
 
 const PlusElement: React.FC<Props> = ({ listElements, handleSelectElement }) => {
-  // function
+  // functions
   const handleClickElement = (element: ElementModel) => {
     handleSelectElement(element)
   }

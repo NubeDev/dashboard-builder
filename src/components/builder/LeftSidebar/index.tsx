@@ -40,8 +40,7 @@ const LeftSidebar = () => {
     const newElement: RowModel = {
       id: uuidv4(),
       column: [],
-      parentId: uuidv4(),
-      position: element.position
+      parentId: uuidv4()
     }
 
     dispatch(addRow(newElement))

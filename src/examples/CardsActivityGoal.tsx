@@ -52,7 +52,7 @@ const data = [
   }
 ]
 
-export default function CardsActivityGoal({ title }: Props) {
+const CardsActivityGoal = ({ title }: Props) => {
   const [goal, setGoal] = React.useState(350)
 
   function onClick(adjustment: number) {
@@ -115,3 +115,5 @@ export default function CardsActivityGoal({ title }: Props) {
     </Card>
   )
 }
+
+export default CardsActivityGoal

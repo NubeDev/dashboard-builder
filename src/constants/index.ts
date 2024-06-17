@@ -1,7 +1,6 @@
 import { Square } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { Row } from 'src/components/blocks'
 import { ElementModel, RowLayoutModel } from 'src/utils/models'
 import {
   DivideLayoutFour,
@@ -14,41 +13,13 @@ import {
   DivideLayoutTwo,
   DivideLayoutTwoOne
 } from 'src/components/common/DivideLayout'
-import Logo from 'src/components/common/Logo'
-import Menu from 'src/components/blocks/Headers/Menu'
-import OverviewChart from 'src/examples/OverviewChart'
-import CardsStats from 'src/examples/CardsStats'
-import CardsActivityGoal from 'src/examples/CardsActivityGoal'
-import DemoGithub from 'src/examples/DemoGithub'
-import { CardsTeamMembers } from 'src/examples/CardsTeamMembers'
-import DatePickerDemo from 'src/examples/DatePickerDemo'
-import MenuFooter from 'src/components/blocks/Footers/Menu'
-import { TableDemo } from 'src/examples/InvoiceTable'
-import { CardsCookieSettings } from 'src/examples/CardsCookieSettings'
 
 export const LIST_CORE_ELEMENTS: ElementModel[] = [
   {
     name: 'box',
-    type: 'component',
     icon: Square,
-    element: Row,
-    label: 'Row'
-  },
-  {
-    name: 'box',
-    type: 'component',
-    element: Row,
-    icon: Square,
-    label: 'Row Header',
-    position: 'header'
-  },
-  {
-    name: 'box',
-    type: 'component',
-    element: Row,
-    icon: Square,
-    label: 'Row Footer',
-    position: 'footer'
+    label: 'Row',
+    value: 'row'
   }
 ]
 
@@ -224,56 +195,56 @@ export const LIST_ELEMENTS_EXAMPLE: ElementModel[] = [
   {
     label: '0',
     name: 'Logo',
-    element: Logo
+    value: 'logo'
   },
   {
     label: '9',
     name: 'Menu Header',
-    element: Menu
+    value: 'menu_header'
   },
   {
     label: '10',
     name: 'Menu Footer',
-    element: MenuFooter
+    value: 'menu_footer'
   },
   {
     label: '1',
     name: 'Table',
-    element: TableDemo
+    value: 'table'
   },
   {
     label: '2',
     name: 'Cookie Settings',
-    element: CardsCookieSettings
+    value: 'cookie_settings'
   },
   {
     label: '3',
     name: 'Overview Chart',
-    element: OverviewChart
+    value: 'overview_chart'
   },
   {
     label: '4',
     name: 'Cards Status',
-    element: CardsStats
+    value: 'cards_status'
   },
   {
     label: '5',
     name: 'Cards Activity Goal',
-    element: CardsActivityGoal
+    value: 'cards_activity_goal'
   },
   {
     label: '6',
     name: 'Demo Github',
-    element: DemoGithub
+    value: 'demo_github'
   },
   {
     label: '7',
     name: 'Cards Team Members',
-    element: CardsTeamMembers
+    value: 'cards_team_members'
   },
   {
     label: '8',
     name: 'Date Picker Demo',
-    element: DatePickerDemo
+    value: 'date_picker_demo'
   }
 ]

@@ -7,7 +7,7 @@ type Props = {
   title?: string
 }
 
-export function CardsCookieSettings({ title }: Props) {
+const CardsCookieSettings = ({ title }: Props) => {
   return (
     <Card>
       <CardHeader>
@@ -51,3 +51,5 @@ export function CardsCookieSettings({ title }: Props) {
     </Card>
   )
 }
+
+export default CardsCookieSettings
