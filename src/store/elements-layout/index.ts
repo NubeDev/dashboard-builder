@@ -260,6 +260,9 @@ export const elementsLayoutSlice = createSlice({
           state.listElements = nextLayout
         }
       }
+    },
+    addNewLayout: (state, action: PayloadAction<RowModel[]>) => {
+      state.listElements = action.payload
     }
   }
 })
@@ -282,6 +285,7 @@ export const {
   addColumnByColumnIdAndColumnElement,
   changeRowLayout,
   swapRowByRowId,
-  handleUndoLayout
+  handleUndoLayout,
+  addNewLayout
 } = elementsLayoutSlice.actions
 export default elementsLayoutSlice.reducer

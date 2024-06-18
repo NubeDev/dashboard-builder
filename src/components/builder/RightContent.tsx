@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { RootState } from 'src/store/store'
 
 import DragDropSection from '../blocks/DragDropSection'
+import { Button } from 'src/shadcn/components/ui/button'
 
 const Container = styled.div`
   flex: 1;
@@ -30,9 +31,30 @@ const RightContent = () => {
   // const
   const selectedComponents = useSelector((state: RootState) => state.elementsLayout.listElements)
 
+  // functions
+  const handleExportToJSON = async () => {
+    console.log('export')
+    const fileName = 'export'
+    const json = JSON.stringify(selectedComponents, null, 2)
+    const blob = new Blob([json], { type: 'application/json' })
+    const href = URL.createObjectURL(blob)
+
+    const link = document.createElement('a')
+    link.href = href
+    link.download = fileName + '.json'
+    document.body.appendChild(link)
+    link.click()
+
+    document.body.removeChild(link)
+    URL.revokeObjectURL(href)
+  }
+
   return (
     <Container>
-      <Title className="shrink">Preview</Title>
+      <div className="flex justify-between">
+        <Title className="shrink">Preview</Title>
+        <Button onClick={handleExportToJSON}>Export</Button>
+      </div>
       {(!selectedComponents || selectedComponents?.length === 0) && (
         <Placeholder>Select an element to view its details</Placeholder>
       )}

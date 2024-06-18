@@ -8,6 +8,8 @@ import styled from 'styled-components'
 import { Button } from 'src/shadcn/components/ui/button'
 import { addRow } from 'src/store/elements-layout'
 import { ElementModel, RowModel } from 'src/utils/models'
+
+import ImportButton from './ImportButton'
 import AddElementExpandingSection from './AddElementExpanding'
 
 const SidebarContainer = styled.aside`
@@ -76,6 +78,8 @@ const LeftSidebar = () => {
           <PlusIcon className="size-5 shrink-0 text-black" />
           <span className="text-sm text-black">Add</span>
         </Button>
+
+        <ImportButton />
       </SidebarContainer>
 
       <AddElementExpandingSection
