@@ -45,3 +45,14 @@ export interface UndoRedoModel {
   row: RowModel[]
   isCurrent: boolean
 }
+
+export interface LayoutState {
+  pastLayouts: RowModel[][]
+  presentLayout: RowModel[]
+  futureLayouts: RowModel[][]
+}
+
+export interface UndoRedoStateModel {
+  pastLayouts: RowModel[][]
+  futureLayouts: RowModel[][]
+}

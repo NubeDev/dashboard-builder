@@ -32,7 +32,7 @@ const EditRowPopup = ({ isOpen, openChange, currentRow }: Props) => {
     <Dialog open={isOpen} onOpenChange={openChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit row</DialogTitle>
+          <DialogTitle>Update layout</DialogTitle>
         </DialogHeader>
         <div>
           <h3 className="font-semibold mb-6">Choose another layout</h3>

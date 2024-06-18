@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { ClipboardPaste, CopyPlus, FilePenLine, Folders, Trash2 } from 'lucide-react'
+import { ClipboardPaste, CopyPlus, FilePenLine, Folders, Redo2, Trash2, Undo2 } from 'lucide-react'
 
 import { RowModel } from 'src/utils/models'
 import { RootState } from 'src/store/store'
-import { addRowByCopy, removeRow } from 'src/store/elements-layout'
+import { addRowByCopy, redo, removeRow, undo } from 'src/store/elements-layout'
 import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
 import {
   ContextMenu,
@@ -58,6 +58,14 @@ const WrapperRightClickRow = ({ children, currentRow, onEdit }: Props) => {
     onEdit()
   }
 
+  const handleUndo = () => {
+    dispatch(undo())
+  }
+
+  const handleRedo = () => {
+    dispatch(redo())
+  }
+
   const disabledEditRow = !currentRow.column || currentRow.column.length === 0
 
   return (
@@ -77,8 +85,22 @@ const WrapperRightClickRow = ({ children, currentRow, onEdit }: Props) => {
           </ContextMenuShortcut>
         </ContextMenuItem>
 
+        <ContextMenuItem onSelect={handleUndo}>
+          Undo
+          <ContextMenuShortcut>
+            <Undo2 className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
+        <ContextMenuItem onSelect={handleRedo}>
+          Redo
+          <ContextMenuShortcut>
+            <Redo2 className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
         <ContextMenuItem disabled={disabledEditRow} onSelect={handleEditRow}>
-          Edit row
+          Update layout
           <ContextMenuShortcut>
             <FilePenLine className="size-4" />
           </ContextMenuShortcut>

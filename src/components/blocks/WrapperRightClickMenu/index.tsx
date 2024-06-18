@@ -11,8 +11,10 @@ import {
   addColumnByColumnIdAndColumnElement,
   addColumnByRowIdAndColumnElement,
   addRowByCopy,
+  redo,
   removeElementFromColumnByColumnId,
-  removeRow
+  removeRow,
+  undo
 } from 'src/store/elements-layout'
 import {
   ContextMenuContent,
@@ -81,6 +83,14 @@ const WrapperRightClickMenu = (props: Props) => {
     }
   }
 
+  const handleUndo = () => {
+    dispatch(undo())
+  }
+
+  const handleRedo = () => {
+    dispatch(redo())
+  }
+
   return (
     <ContextMenu>
       <ContextMenuTrigger>{props.children}</ContextMenuTrigger>
@@ -97,18 +107,21 @@ const WrapperRightClickMenu = (props: Props) => {
             <ClipboardPaste className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem disabled>
+
+        <ContextMenuItem onSelect={handleUndo}>
           Undo
           <ContextMenuShortcut>
             <Undo2 className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem disabled>
+
+        <ContextMenuItem onSelect={handleRedo}>
           Redo
           <ContextMenuShortcut>
             <Redo2 className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
+
         <ContextMenuItem onSelect={handleDelete}>
           Delete
           <ContextMenuShortcut>

@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux'
-import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash, Undo2 } from 'lucide-react'
+import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash, Undo2, Redo2 } from 'lucide-react'
 
 import { cn } from 'src/shadcn/lib/utils'
 import { DragItemModel } from 'src/utils/models'
-import { addColumnByDuplicate, handleUndoLayout } from 'src/store/elements-layout'
+import { addColumnByDuplicate, undo, redo } from 'src/store/elements-layout'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -11,7 +11,6 @@ import {
   ContextMenuShortcut,
   ContextMenuTrigger
 } from 'src/shadcn/components/ui/context-menu'
-import { getCurrentListLayout } from 'src/utils'
 
 interface Props<T> {
   children: React.ReactElement
@@ -35,11 +34,11 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
   }
 
   const handleUndo = () => {
-    const undoListRow = getCurrentListLayout()
+    dispatch(undo())
+  }
 
-    if (undoListRow) {
-      dispatch(handleUndoLayout(undoListRow))
-    }
+  const handleRedo = () => {
+    dispatch(redo())
   }
 
   return (
@@ -80,6 +79,13 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
           Undo
           <ContextMenuShortcut>
             <Undo2 className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
+        <ContextMenuItem onSelect={handleRedo}>
+          Redo
+          <ContextMenuShortcut>
+            <Redo2 className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
 
