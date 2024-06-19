@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { cn } from 'src/shadcn/lib/utils'
-import { LIST_ROW_LAYOUTS } from 'src/constants'
-import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
+import { cn } from '@/lib/utils'
+import { LIST_ROW_LAYOUTS } from '@/constants'
+import { DragItemModel, ElementModel, RowModel } from '@/utils/models'
 
 import EditRowPopup from './EditRowPopup'
 import SelectLayoutButton from '../DragAndDrop/SelectLayoutButton'

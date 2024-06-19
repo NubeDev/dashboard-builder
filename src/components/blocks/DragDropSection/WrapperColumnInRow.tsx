@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { RootState } from 'src/store/store'
-import { setCurrentEditComponent } from 'src/store/current-edit-component'
-import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
-import { addElementToColumn, removeElementFromColumn } from 'src/store/elements-layout'
-import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
+import { RootState } from '@/store/store'
+import { setCurrentEditComponent } from '@/store/current-edit-component'
+import { DragItemModel, ElementModel, RowModel } from '@/utils/models'
+import { addElementToColumn, removeElementFromColumn } from '@/store/elements-layout'
+import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from '@/store/temp-list-components'
 
 import DragDropItem from '../DragAndDrop/DragDropItem'
 import WrapperRightClick from './WrapperRightClick'

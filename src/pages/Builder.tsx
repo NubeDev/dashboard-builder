@@ -1,21 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import styled from 'styled-components'
+import { RootState } from '@/store/store'
+import { resetCurrentEditComponent } from '@/store/current-edit-component'
 
-import { RootState } from 'src/store/store'
-import { resetCurrentEditComponent } from 'src/store/current-edit-component'
-
-import Layout from 'src/components/layout'
-import LeftSidebar from 'src/components/builder/LeftSidebar'
-import RightContent from 'src/components/builder/RightContent'
-import MiddleSidebar from 'src/components/builder/MiddleSidebar'
-import ComponentEditSheet from 'src/components/common/ComponentEditSheet'
-
-const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100%;
-`
+import Layout from '@/components/layout'
+import LeftSidebar from '@/components/builder/LeftSidebar'
+import RightContent from '@/components/builder/RightContent'
+import MiddleSidebar from '@/components/builder/MiddleSidebar'
+import ComponentEditSheet from '@/components/common/ComponentEditSheet'
 
 const Builder: React.FC = () => {
   const dispatch = useDispatch()
@@ -28,11 +20,11 @@ const Builder: React.FC = () => {
 
   return (
     <Layout>
-      <Container>
+      <div className="flex h-screen w-full">
         <LeftSidebar />
         <MiddleSidebar />
         <RightContent />
-      </Container>
+      </div>
 
       <ComponentEditSheet
         isShowSheet={!!currentEditComponent}

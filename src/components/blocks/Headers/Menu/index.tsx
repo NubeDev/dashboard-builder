@@ -1,4 +1,4 @@
-import { buttonVariants } from 'src/shadcn/components/ui/button'
+import { buttonVariants } from '@/shadcn/components/button'
 
 interface RouteProps {
   href: string

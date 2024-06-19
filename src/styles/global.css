@@ -4,9 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "/node_modules/react-grid-layout/css/styles.css";
-@import "/node_modules/react-resizable/css/styles.css";
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -78,7 +75,7 @@
 @layer base {
   * {
     @apply border-border;
-    font-family: "Inter Tight", sans-serif;
+    font-family: 'Inter Tight', sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -86,6 +83,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }

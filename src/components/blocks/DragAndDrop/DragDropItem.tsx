@@ -1,11 +1,11 @@
 import { CircleX } from 'lucide-react'
 
-import { cn } from 'src/shadcn/lib/utils'
-import { LIST_ELEMENTS_EXAMPLE } from 'src/constants'
+import { cn } from '@/lib/utils'
+import { LIST_ELEMENTS_EXAMPLE } from '@/constants'
 
-import PlusElement from 'src/components/common/BlankBlock/PlusElement'
-import { getComponentByName } from 'src/utils'
-import { DragItemModel, ElementModel } from 'src/utils/models'
+import PlusElement from '@/components/common/BlankBlock/PlusElement'
+import { DragItemModel, ElementModel } from '@/utils/models'
+import { getComponentByName } from '@/utils'
 
 type Props = {
   item: DragItemModel

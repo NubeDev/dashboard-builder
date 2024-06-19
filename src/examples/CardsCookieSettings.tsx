@@ -1,7 +1,7 @@
-import { Button } from 'src/shadcn/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from 'src/shadcn/components/ui/card'
-import { Label } from 'src/shadcn/components/ui/label'
-import { Switch } from 'src/shadcn/components/ui/switch'
+import { Button } from '@/shadcn/components/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shadcn/components/card'
+import { Label } from '@/shadcn/components/label'
+import { Switch } from '@/shadcn/components/switch'
 
 type Props = {
   title?: string

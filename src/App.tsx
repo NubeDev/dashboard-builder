@@ -1,11 +1,10 @@
 import { Provider } from 'react-redux'
 
-import React from 'react'
-import Builder from './pages/Builder'
+import { store } from '@/store/store'
 
-import { store } from 'src/store/store'
+import Builder from '@/pages/Builder'
 
-const App: React.FC = () => {
+function App() {
   return (
     <Provider store={store}>
       <Builder />

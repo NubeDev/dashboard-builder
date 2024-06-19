@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 
-import { Button } from 'src/shadcn/components/ui/button'
-import { Input } from 'src/shadcn/components/ui/input'
-import { Label } from 'src/shadcn/components/ui/label'
-import { DragItemModel } from 'src/utils/models'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from 'src/shadcn/components/ui/sheet'
-import { changeComponentPropByColumnId } from 'src/store/elements-layout'
+import { Input } from '@/shadcn/components/input'
+import { Label } from '@/shadcn/components/label'
+import { Button } from '@/shadcn/components/button'
+import { DragItemModel } from '@/utils/models'
+import { changeComponentPropByColumnId } from '@/store/elements-layout'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/shadcn/components/sheet'
 
 type Props = {
   isShowSheet: boolean

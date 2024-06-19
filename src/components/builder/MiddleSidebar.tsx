@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import styled from 'styled-components'
 
-import { Tree } from 'src/shadcn/components/ui/tree'
-import { RootState } from 'src/store/store'
-import { onFocusToItem } from 'src/store/elements-layout'
+import { Tree } from '@/shadcn/components/tree'
+import { RootState } from '@/store/store'
+import { onFocusToItem } from '@/store/elements-layout'
 
-import type { TreeDataItem } from 'src/shadcn/components/ui/tree'
+import type { TreeDataItem } from '@/shadcn/components/tree'
 
 const Sidebar = styled.aside`
   margin-left: 100px;

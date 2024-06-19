@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { Avatar, AvatarFallback, AvatarImage } from 'src/shadcn/components/ui/avatar'
-import { Button } from 'src/shadcn/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'src/shadcn/components/ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shadcn/components/avatar'
+import { Button } from '@/shadcn/components/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shadcn/components/card'
 import {
   Command,
   CommandEmpty,
@@ -9,8 +9,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList
-} from 'src/shadcn/components/ui/command'
-import { Popover, PopoverContent, PopoverTrigger } from 'src/shadcn/components/ui/popover'
+} from '@/shadcn/components/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/shadcn/components/popover'
 
 type Props = {
   title?: string

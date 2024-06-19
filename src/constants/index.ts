@@ -1,7 +1,7 @@
 import { Square } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { ElementModel, RowLayoutModel } from 'src/utils/models'
+import { ElementModel, RowLayoutModel } from '@/utils/models'
 import {
   DivideLayoutFour,
   DivideLayoutOne,
@@ -12,7 +12,7 @@ import {
   DivideLayoutThreeOne,
   DivideLayoutTwo,
   DivideLayoutTwoOne
-} from 'src/components/common/DivideLayout'
+} from '@/components/common/DivideLayout'
 
 export const LIST_CORE_ELEMENTS: ElementModel[] = [
   {

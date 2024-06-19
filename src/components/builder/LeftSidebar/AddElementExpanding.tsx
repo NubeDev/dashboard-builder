@@ -2,12 +2,12 @@ import { useState } from 'react'
 
 import styled from 'styled-components'
 
-import { Textarea } from 'src/shadcn/components/ui/textarea'
-import { ElementModel } from 'src/utils/models'
-import { Card, CardContent } from 'src/shadcn/components/ui/card'
-import { LIST_CORE_ELEMENTS } from 'src/constants'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from 'src/shadcn/components/ui/tabs'
-import { Nav } from 'src/components/nav'
+import { Nav } from '@/components/nav'
+import { Textarea } from '@/shadcn/components/textarea'
+import { ElementModel } from '@/utils/models'
+import { Card, CardContent } from '@/shadcn/components/card'
+import { LIST_CORE_ELEMENTS } from '@/constants'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shadcn/components/tabs'
 
 interface AddElementExpandingProps {
   isExpanded: boolean

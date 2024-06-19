@@ -1,7 +1,7 @@
 import { CirclePlus } from 'lucide-react'
 
-import { LIST_ROW_LAYOUTS } from 'src/constants'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 'src/shadcn/components/ui/dialog'
+import { LIST_ROW_LAYOUTS } from '@/constants'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shadcn/components/dialog'
 
 type Props = {
   onChoseLayout: (layout: string) => void

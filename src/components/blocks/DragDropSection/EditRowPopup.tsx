@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { cn } from 'src/shadcn/lib/utils'
-import { Button } from 'src/shadcn/components/ui/button'
-import { RowModel } from 'src/utils/models'
-import { LIST_ROW_LAYOUTS } from 'src/constants'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from 'src/shadcn/components/ui/dialog'
-import { changeRowLayout } from 'src/store/elements-layout'
+import { cn } from '@/lib/utils'
+import { Button } from '@/shadcn/components/button'
+import { RowModel } from '@/utils/models'
+import { LIST_ROW_LAYOUTS } from '@/constants'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shadcn/components/dialog'
+import { changeRowLayout } from '@/store/elements-layout'
 
 type Props = {
   isOpen: boolean

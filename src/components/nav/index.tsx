@@ -1,6 +1,6 @@
-import { cn } from 'src/shadcn/lib/utils'
-import { buttonVariants } from 'src/shadcn/components/ui/button'
-import { ElementModel } from 'src/utils/models'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/shadcn/components/button'
+import { ElementModel } from '@/utils/models'
 
 type Props = {
   listBlock: ElementModel[]

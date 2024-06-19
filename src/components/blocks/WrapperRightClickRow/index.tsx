@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ClipboardPaste, CopyPlus, FilePenLine, Folders, Redo2, Trash2, Undo2 } from 'lucide-react'
 
-import { RowModel } from 'src/utils/models'
-import { RootState } from 'src/store/store'
-import { addRowByCopy, redo, removeRow, undo } from 'src/store/elements-layout'
-import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from 'src/store/temp-list-components'
+import { RowModel } from '@/utils/models'
+import { RootState } from '@/store/store'
+import { addRowByCopy, redo, removeRow, undo } from '@/store/elements-layout'
+import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from '@/store/temp-list-components'
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuShortcut,
   ContextMenuTrigger
-} from 'src/shadcn/components/ui/context-menu'
+} from '@/shadcn/components/context-menu'
 
 interface Props {
   children: React.ReactElement

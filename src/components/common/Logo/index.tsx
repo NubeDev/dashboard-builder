@@ -1,4 +1,4 @@
-import { LogoIcon } from 'src/icons'
+import { LogoIcon } from '@/icons'
 
 const Logo = () => {
   return (

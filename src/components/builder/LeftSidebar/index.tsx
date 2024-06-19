@@ -1,13 +1,13 @@
-import { PlusIcon } from '@heroicons/react/20/solid'
+import { Plus } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
 
 import styled from 'styled-components'
 
-import { Button } from 'src/shadcn/components/ui/button'
-import { addRow } from 'src/store/elements-layout'
-import { ElementModel, RowModel } from 'src/utils/models'
+import { Button } from '@/shadcn/components/button'
+import { addRow } from '@/store/elements-layout'
+import { ElementModel, RowModel } from '@/utils/models'
 
 import ImportButton from './ImportButton'
 import AddElementExpandingSection from './AddElementExpanding'
@@ -38,6 +38,7 @@ const LeftSidebar = () => {
   }
 
   const handleAddElement = (element: ElementModel) => {
+    console.log(element)
     setIsExpanded(false)
     const newElement: RowModel = {
       id: uuidv4(),
@@ -75,7 +76,7 @@ const LeftSidebar = () => {
           onClick={() => setIsExpanded(!isExpanded)}
           className="flex items-center justify-center w-full"
         >
-          <PlusIcon className="size-5 shrink-0 text-black" />
+          <Plus className="size-5 shrink-0 text-black" />
           <span className="text-sm text-black">Add</span>
         </Button>
 

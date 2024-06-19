@@ -1,5 +1,5 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
-import { Card, CardContent, CardHeader, CardTitle } from 'src/shadcn/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shadcn/components/card'
 
 const data = [
   {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toaster } from 'src/shadcn/components/ui/sonner'
+import { Toaster } from '@/shadcn/components/sonner'
 
 interface LayoutProps {
   children: React.ReactNode

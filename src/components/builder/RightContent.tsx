@@ -2,10 +2,10 @@ import { useSelector } from 'react-redux'
 
 import styled from 'styled-components'
 
+import { Button } from '@/shadcn/components/button'
 import { RootState } from 'src/store/store'
 
 import DragDropSection from '../blocks/DragDropSection'
-import { Button } from 'src/shadcn/components/ui/button'
 
 const Container = styled.div`
   flex: 1;

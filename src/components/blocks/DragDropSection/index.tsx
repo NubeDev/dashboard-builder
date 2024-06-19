@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { DragItemModel, ElementModel, RowModel } from 'src/utils/models'
+import { DragItemModel, ElementModel, RowModel } from '@/utils/models'
 import {
   addColumnToRow,
   addElementToColumn,
   swapElement,
   removeElementFromColumn,
   swapRowByRowId
-} from 'src/store/elements-layout'
+} from '@/store/elements-layout'
 
 import Row from './Row'
 import WrapperDragDropRow from '../WrapperDragDropRow'

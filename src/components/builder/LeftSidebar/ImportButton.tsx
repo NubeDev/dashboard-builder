@@ -2,11 +2,11 @@ import { FileUp } from 'lucide-react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Label } from 'src/shadcn/components/ui/label'
-import { Input } from 'src/shadcn/components/ui/input'
-import { Button } from 'src/shadcn/components/ui/button'
-import { addNewLayout } from 'src/store/elements-layout'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 'src/shadcn/components/ui/dialog'
+import { Label } from '@/shadcn/components/label'
+import { Input } from '@/shadcn/components/input'
+import { Button } from '@/shadcn/components/button'
+import { addNewLayout } from '@/store/elements-layout'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shadcn/components/dialog'
 
 const ImportButton = () => {
   const dispatch = useDispatch()

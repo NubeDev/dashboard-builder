@@ -1,16 +1,16 @@
 import { useDispatch } from 'react-redux'
 import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash, Undo2, Redo2 } from 'lucide-react'
 
-import { cn } from 'src/shadcn/lib/utils'
-import { DragItemModel } from 'src/utils/models'
-import { addColumnByDuplicate, undo, redo } from 'src/store/elements-layout'
+import { cn } from '@/lib/utils'
+import { addColumnByDuplicate, undo, redo } from '@/store/elements-layout'
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuShortcut,
   ContextMenuTrigger
-} from 'src/shadcn/components/ui/context-menu'
+} from '@/shadcn/components/context-menu'
+import { DragItemModel } from '@/utils/models'
 
 interface Props<T> {
   children: React.ReactElement

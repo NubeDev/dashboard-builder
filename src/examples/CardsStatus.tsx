@@ -1,5 +1,5 @@
 import { Bar, BarChart, Line, LineChart, ResponsiveContainer } from 'recharts'
-import { Card, CardContent, CardHeader, CardTitle } from 'src/shadcn/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shadcn/components/card'
 
 type Props = {
   title?: string

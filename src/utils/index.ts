@@ -7,11 +7,11 @@ import {
   DemoGithub,
   OverviewChart,
   TableDemo
-} from 'src/examples'
+} from '@/examples'
 
-import Logo from 'src/components/common/Logo'
-import MenuFooter from 'src/components/blocks/Footers/Menu'
-import MenuHeader from 'src/components/blocks/Headers/Menu'
+import Logo from '@/components/common/Logo'
+import MenuFooter from '@/components/blocks/Footers/Menu'
+import MenuHeader from '@/components/blocks/Headers/Menu'
 
 export const getArrayBooleanByCurrentLayout = (currentLayout: string) => {
   if (currentLayout.includes('_')) {

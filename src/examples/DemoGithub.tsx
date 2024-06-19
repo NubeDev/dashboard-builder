@@ -1,6 +1,6 @@
 import { ChevronDownIcon, CircleIcon, PlusIcon, StarIcon } from '@radix-ui/react-icons'
-import { Button } from 'src/shadcn/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'src/shadcn/components/ui/card'
+import { Button } from '@/shadcn/components/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shadcn/components/card'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -9,8 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from 'src/shadcn/components/ui/dropdown-menu'
-import { Separator } from 'src/shadcn/components/ui/separator'
+} from '@/shadcn/components/dropdown-menu'
+import { Separator } from '@/shadcn/components/separator'
 
 type Props = {
   title?: string

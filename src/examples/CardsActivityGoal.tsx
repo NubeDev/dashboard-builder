@@ -3,8 +3,8 @@
 import { Minus, Plus } from 'lucide-react'
 import * as React from 'react'
 import { Bar, BarChart, ResponsiveContainer } from 'recharts'
-import { Button } from 'src/shadcn/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from 'src/shadcn/components/ui/card'
+import { Button } from '@/shadcn/components/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shadcn/components/card'
 
 type Props = {
   title?: string

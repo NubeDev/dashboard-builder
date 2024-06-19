@@ -3,10 +3,10 @@ import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import { ClipboardPaste, Copy, Trash2, Undo2, Redo2 } from 'lucide-react'
 
-import { RootState } from 'src/store/store'
-import { TreeDataItem } from 'src/shadcn/components/ui/tree'
-import { DragItemModel } from 'src/utils/models'
-import { TempMenuModel, addTempMenu } from 'src/store/temp-list-menus'
+import { RootState } from '@/store/store'
+import { TreeDataItem } from '@/shadcn/components/tree'
+import { DragItemModel } from '@/utils/models'
+import { TempMenuModel, addTempMenu } from '@/store/temp-list-menus'
 import {
   addColumnByColumnIdAndColumnElement,
   addColumnByRowIdAndColumnElement,
@@ -15,14 +15,14 @@ import {
   removeElementFromColumnByColumnId,
   removeRow,
   undo
-} from 'src/store/elements-layout'
+} from '@/store/elements-layout'
 import {
   ContextMenuContent,
   ContextMenu,
   ContextMenuTrigger,
   ContextMenuItem,
   ContextMenuShortcut
-} from 'src/shadcn/components/ui/context-menu'
+} from '@/shadcn/components/context-menu'
 
 interface Props {
   children: React.ReactElement
