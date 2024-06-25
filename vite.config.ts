@@ -12,7 +12,7 @@ export default defineConfig({
       remotes: {
         pageBuilder: 'http://localhost:5173/assets/remoteEntry.js'
       },
-      shared: ['react', 'react-dom']
+      shared: ['react', 'react-dom', 'jotai', 'tldraw']
     })
   ],
   resolve: {

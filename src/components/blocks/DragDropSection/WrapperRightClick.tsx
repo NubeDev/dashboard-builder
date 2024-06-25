@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux'
-import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash, Undo2, Redo2 } from 'lucide-react'
+import { ClipboardPaste, Copy, CopyPlus, FilePenLine, Trash, Undo2, Redo2, Trash2, ListPlus } from 'lucide-react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { cn } from '@/lib/utils'
-import { addColumnByDuplicate, undo, redo } from '@/store/elements-layout'
+import { addColumnByDuplicate, undo, redo, removeColumnEmptyByCplumnId, addNewColumn } from '@/store/elements-layout'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -39,6 +40,20 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
 
   const handleRedo = () => {
     dispatch(redo())
+  }
+
+  const handleRemoveColumn = () => {
+    dispatch(removeColumnEmptyByCplumnId({ columnId: (props.item as DragItemModel).id }))
+  }
+
+  const handleAddColumn = () => {
+    const { className, id } = props.item as DragItemModel
+    const newColumn = {
+      id: uuidv4(),
+      className: className
+    }
+
+    dispatch(addNewColumn({ columnId: id, newCol: newColumn }))
   }
 
   return (
@@ -89,7 +104,21 @@ const WrapperRightClick = <T,>(props: Props<T>) => {
           </ContextMenuShortcut>
         </ContextMenuItem>
 
-        <ContextMenuItem disabled={!(props.item as DragItemModel).component} onSelect={handleDuplicateRow}>
+        <ContextMenuItem onSelect={handleAddColumn}>
+          Add column
+          <ContextMenuShortcut>
+            <ListPlus className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
+        <ContextMenuItem disabled={!!(props.item as DragItemModel).componentName} onSelect={handleRemoveColumn}>
+          Remove column
+          <ContextMenuShortcut>
+            <Trash2 className="size-4" />
+          </ContextMenuShortcut>
+        </ContextMenuItem>
+
+        <ContextMenuItem disabled={!(props.item as DragItemModel).componentName} onSelect={handleDuplicateRow}>
           Duplicate component
           <ContextMenuShortcut>
             <CopyPlus className="size-4" />

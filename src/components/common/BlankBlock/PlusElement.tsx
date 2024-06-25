@@ -5,14 +5,16 @@ import { cn } from '@/lib/utils'
 import { ElementModel } from '@/utils/models'
 import { buttonVariants } from '@/shadcn/components/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shadcn/components/dialog'
+
 import PageBuilder from '@/components/blocks/PageBuilder'
 
 type Props = {
   listElements: ElementModel[]
   handleSelectElement: (element: ElementModel) => void
+  handleSelectImage?: (img: string) => void
 }
 
-const PlusElement: React.FC<Props> = ({ listElements, handleSelectElement }) => {
+const PlusElement: React.FC<Props> = ({ listElements, handleSelectElement, handleSelectImage }) => {
   // states
   const [openPageBuilder, setOpenPageBuilder] = useState(false)
 
@@ -23,6 +25,10 @@ const PlusElement: React.FC<Props> = ({ listElements, handleSelectElement }) => 
 
   const handleOpenPageBuilder = () => {
     setOpenPageBuilder(true)
+  }
+
+  const handleSaveImage = (img: string) => {
+    handleSelectImage && handleSelectImage(img)
   }
 
   return (
@@ -67,8 +73,8 @@ const PlusElement: React.FC<Props> = ({ listElements, handleSelectElement }) => 
         <DialogContent className="max-w-[calc(100vw-100px)] w-full h-[80vh] mx-auto z-[99999999]">
           <DialogHeader>
             <DialogTitle>Page Builder</DialogTitle>
-            <PageBuilder />
           </DialogHeader>
+          <PageBuilder handleSaveImage={handleSaveImage} />
         </DialogContent>
       </Dialog>
     </>

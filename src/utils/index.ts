@@ -12,6 +12,7 @@ import {
 import Logo from '@/components/common/Logo'
 import MenuFooter from '@/components/blocks/Footers/Menu'
 import MenuHeader from '@/components/blocks/Headers/Menu'
+import { RowModel } from './models'
 
 export const getArrayBooleanByCurrentLayout = (currentLayout: string) => {
   if (currentLayout.includes('_')) {
@@ -48,5 +49,15 @@ export const getComponentByName = (name: string) => {
       return CardsTeamMembers
     case 'date_picker_demo':
       return DatePickerDemo
+  }
+}
+
+export const getRowByColumnId = (rows: RowModel[], columnId: string) => {
+  const currentRow = rows.find(row => row?.column?.find(col => col.id === columnId))
+  const currentIndex = rows.findIndex(row => row?.column?.find(col => col.id === columnId))
+
+  return {
+    currentIndex,
+    currentRow
   }
 }

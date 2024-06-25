@@ -1,14 +1,23 @@
-import React from "react"
+import React, { useEffect } from 'react'
 
-import Drawing from "pageBuilder/Drawing"
+import WrapperApp from 'pageBuilder/WrapperApp'
+import useSharedImage from 'pageBuilder/useSharedImage'
 
+const PageBuilder = props => {
+  const [sharedImage, setSharedImage] = useSharedImage()
 
-const PageBuilder = () => {
-    return ( 
-        <React.Fragment>
-            <Drawing />
-        </React.Fragment>
-     );
+  useEffect(() => {
+    if (sharedImage) {
+      props.handleSaveImage(sharedImage)
+      setSharedImage('')
+    }
+  }, [sharedImage])
+
+  return (
+    <React.Fragment>
+      <WrapperApp />
+    </React.Fragment>
+  )
 }
- 
-export default PageBuilder;
+
+export default PageBuilder

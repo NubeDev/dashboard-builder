@@ -1,16 +1,18 @@
+import { useMemo } from 'react'
 import { CircleX } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { getComponentByName } from '@/utils'
 import { LIST_ELEMENTS_EXAMPLE } from '@/constants'
+import { DragItemModel, ElementModel } from '@/utils/models'
 
 import PlusElement from '@/components/common/BlankBlock/PlusElement'
-import { DragItemModel, ElementModel } from '@/utils/models'
-import { getComponentByName } from '@/utils'
 
 type Props = {
   item: DragItemModel
   className?: string
   onSelectedElement: (element: ElementModel, id: string) => void
+  onSelectImage: (img: string, id: string) => void
   onRemoveElement: (id: string) => void
   onDragStart: (id: string) => void
   onDropEnd: (id: string) => void
@@ -22,7 +24,8 @@ const DragDropItem: React.FC<Props> = ({
   onDragStart,
   onDropEnd,
   onSelectedElement,
-  onRemoveElement
+  onRemoveElement,
+  onSelectImage
 }) => {
   // functions
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
@@ -42,7 +45,29 @@ const DragDropItem: React.FC<Props> = ({
     onSelectedElement(element, item.id)
   }
 
-  const CurrentComponent = getComponentByName(item.componentName || '')
+  const handleSelectImage = (img: string) => {
+    onSelectImage(img, item.id)
+  }
+
+  const currentComponent = useMemo(() => {
+    if (item.type === 'image') {
+      return (
+        <div className="h-full flex items-center">
+          <img src={item.componentName} className="mx-auto" />
+        </div>
+      )
+    }
+
+    if (item.componentName) {
+      const Component = getComponentByName(item.componentName)
+
+      if (Component) {
+        return <Component {...item.props} />
+      } else {
+        return <></>
+      }
+    }
+  }, [item])
 
   return (
     <div
@@ -56,8 +81,8 @@ const DragDropItem: React.FC<Props> = ({
       onDragOver={handleOver}
       onDrop={handleDropEnd}
     >
-      {CurrentComponent ? (
-        <div className="w-full relative group/close">
+      {item.componentName ? (
+        <div className="w-full relative group/close h-full">
           <button
             className="absolute top-2 right-2 z-30 bg-white rounded-full hidden group-hover/close:inline-block transition-all"
             onClick={() => {
@@ -66,11 +91,15 @@ const DragDropItem: React.FC<Props> = ({
           >
             <CircleX className="text-red-600" />
           </button>
-          <CurrentComponent {...item.props} />
+          {currentComponent}
         </div>
       ) : (
         <div className="w-full min-h-24 h-full flex items-center justify-center">
-          <PlusElement listElements={LIST_ELEMENTS_EXAMPLE} handleSelectElement={handleSelectElement} />
+          <PlusElement
+            listElements={LIST_ELEMENTS_EXAMPLE}
+            handleSelectElement={handleSelectElement}
+            handleSelectImage={handleSelectImage}
+          />
         </div>
       )}
     </div>

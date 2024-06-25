@@ -5,6 +5,7 @@ export interface ElementModel {
   label: string
   value: string
   icon?: LucideIcon
+  type?: 'component' | 'image'
 }
 
 export interface SelectedElementModel extends ElementModel {
@@ -18,7 +19,8 @@ export interface DragItemModel {
   isFocused?: boolean
   component?: () => JSX.Element
   componentName?: string
-  props?: any
+  props?: Record<string, unknown>
+  type?: 'component' | 'image'
 }
 
 export interface RowLayoutModel {

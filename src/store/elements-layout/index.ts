@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { DragItemModel, ElementModel, RowModel, UndoRedoStateModel } from 'src/utils/models'
 
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { getRowByColumnId } from '@/utils'
 
 interface ElementsLayoutState {
   listElements: RowModel[]
@@ -42,11 +43,14 @@ export const elementsLayoutSlice = createSlice({
     },
     addElementToColumn: (state, action: PayloadAction<{ rowId: string; columnId: string; ele: ElementModel }>) => {
       const { rowId, columnId, ele } = action.payload
+
       state.listElements = state.listElements.map(row =>
         row.id === rowId
           ? {
               ...row,
-              column: row.column.map(col => (col.id === columnId ? { ...col, componentName: ele.value } : col))
+              column: row.column.map(col =>
+                col.id === columnId ? { ...col, componentName: ele.value, type: ele.type } : col
+              )
             }
           : row
       )
@@ -63,9 +67,14 @@ export const elementsLayoutSlice = createSlice({
         const dropColumn = dropRow.column.find(col => col.id === action.payload.dropColumnId)
 
         if (dragColumn && dropColumn) {
-          const temp = dragColumn.componentName
+          const tempComponent = dragColumn.componentName
+          const tempType = dragColumn.type
+
           dragColumn.componentName = dropColumn.componentName
-          dropColumn.componentName = temp
+          dragColumn.type = dropColumn.type
+
+          dropColumn.componentName = tempComponent
+          dropColumn.type = tempType
         }
       }
     },
@@ -159,7 +168,7 @@ export const elementsLayoutSlice = createSlice({
         const currentColumn = currentRow.column?.find(col => col.id === action.payload.columnId)
 
         if (currentColumn) {
-          currentColumn.component = undefined
+          currentColumn.componentName = ''
         }
       }
     },
@@ -197,8 +206,8 @@ export const elementsLayoutSlice = createSlice({
         const updateColumns = newListColumns.map((newCol, index) => {
           const oldCol = updateRow.column[index]
 
-          if (oldCol && oldCol.component) {
-            return { ...newCol, component: oldCol.component }
+          if (oldCol && oldCol.componentName) {
+            return { ...newCol, componentName: oldCol.componentName }
           } else {
             return { ...newCol }
           }
@@ -263,6 +272,29 @@ export const elementsLayoutSlice = createSlice({
     },
     addNewLayout: (state, action: PayloadAction<RowModel[]>) => {
       state.listElements = action.payload
+    },
+    removeColumnEmptyByCplumnId: (state, action: PayloadAction<{ columnId: string }>) => {
+      const { columnId } = action.payload
+      const row = getRowByColumnId(state.listElements, columnId)
+
+      if (row.currentRow && row.currentIndex !== -1) {
+        const newColumns = row.currentRow.column.filter(col => col.id !== columnId)
+        state.listElements[row.currentIndex].column = newColumns
+      }
+    },
+    addNewColumn: (state, action: PayloadAction<{ columnId: string; newCol: DragItemModel }>) => {
+      const { columnId, newCol } = action.payload
+
+      const row = getRowByColumnId(state.listElements, columnId)
+
+      if (row.currentRow?.column && row.currentRow.column.length >= 4) {
+        toast.info('Maximum is 4 column.')
+        return
+      }
+
+      if (row.currentIndex !== -1 && row.currentRow) {
+        state.listElements[row.currentIndex].column.push({ ...newCol })
+      }
     }
   }
 })
@@ -286,6 +318,8 @@ export const {
   changeRowLayout,
   swapRowByRowId,
   handleUndoLayout,
-  addNewLayout
+  addNewLayout,
+  removeColumnEmptyByCplumnId,
+  addNewColumn
 } = elementsLayoutSlice.actions
 export default elementsLayoutSlice.reducer

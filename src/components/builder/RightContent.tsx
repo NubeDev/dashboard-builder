@@ -33,7 +33,6 @@ const RightContent = () => {
 
   // functions
   const handleExportToJSON = async () => {
-    console.log('export')
     const fileName = 'export'
     const json = JSON.stringify(selectedComponents, null, 2)
     const blob = new Blob([json], { type: 'application/json' })

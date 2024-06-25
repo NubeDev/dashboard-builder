@@ -17,7 +17,6 @@ const ImportButton = () => {
   // functions
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files)
     if (e?.target?.files && e.target.files[0]) {
       const fileReader = new FileReader()
       fileReader.readAsText(e.target.files[0], 'UTF-8')

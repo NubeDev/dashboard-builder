@@ -13,12 +13,21 @@ type Props = {
   rowItem: RowModel
   onAdColumn: (id: string, listColumn: DragItemModel[], currentLayout: string) => void
   onSelectElement: (rowId: string, columnId: string, element: ElementModel) => void
+  onSelectImage: (rowId: string, columnId: string, img: string) => void
   onDrag: (rowId: string, columnId: string, fromElement: string) => void
   onDrop: (rowId: string, columnId: string) => void
   onRemoveElement: (rowId: string, columnId: string) => void
 }
 
-const Row: React.FC<Props> = ({ rowItem, onAdColumn, onSelectElement, onDrag, onDrop, onRemoveElement }) => {
+const Row: React.FC<Props> = ({
+  rowItem,
+  onAdColumn,
+  onSelectElement,
+  onDrag,
+  onDrop,
+  onRemoveElement,
+  onSelectImage
+}) => {
   // state
   const [isOpenEditRow, setOpenEditRow] = useState(false)
 
@@ -30,6 +39,10 @@ const Row: React.FC<Props> = ({ rowItem, onAdColumn, onSelectElement, onDrag, on
 
   const handleSelectElement = (columnId: string, element: ElementModel) => {
     onSelectElement(rowItem.id, columnId, element)
+  }
+
+  const handleSelectImage = (columnId: string, img: string) => {
+    onSelectImage(rowItem.id, columnId, img)
   }
 
   const handleDrag = (columnId: string) => {
@@ -70,6 +83,7 @@ const Row: React.FC<Props> = ({ rowItem, onAdColumn, onSelectElement, onDrag, on
               onDrop={handleDrop}
               onRemove={handleRemoveElement}
               onSelectElement={handleSelectElement}
+              onSelectImage={handleSelectImage}
             />
           ) : (
             <div className="flex items-center justify-center h-24">

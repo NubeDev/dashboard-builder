@@ -13,12 +13,21 @@ type Props = {
   items: DragItemModel[]
   row: RowModel
   onSelectElement: (columnId: string, element: ElementModel) => void
+  onSelectImage: (columdId: string, img: string) => void
   onDrag: (columnId: string) => void
   onDrop: (columnId: string) => void
   onRemove: (columnId: string) => void
 }
 
-const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDrag, onDrop, onRemove }) => {
+const WrapperColumnInRow: React.FC<Props> = ({
+  items,
+  row,
+  onSelectElement,
+  onDrag,
+  onDrop,
+  onRemove,
+  onSelectImage
+}) => {
   // const
   const dispatch = useDispatch()
   const tempComponents = useSelector((state: RootState) => state.tempListComponents.listTempComponents)
@@ -80,6 +89,10 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
     dispatch(setCurrentEditComponent(d))
   }
 
+  const handleSelectImage = (img: string, id: string) => {
+    onSelectImage(id, img)
+  }
+
   const isExistCopyComponent = tempComponents.some(e => e.type === 'copy')
 
   return (
@@ -88,7 +101,7 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
         <WrapperRightClick
           key={e.id}
           item={e}
-          isDisabledCopy={!!e.component}
+          isDisabledCopy={!!e.componentName}
           isDisabledPaste={!isExistCopyComponent}
           className={e.className}
           onCopyColumn={handleCopyColumn}
@@ -102,6 +115,7 @@ const WrapperColumnInRow: React.FC<Props> = ({ items, row, onSelectElement, onDr
             onDropEnd={handleDrop}
             onSelectedElement={handleSelectElement}
             onRemoveElement={handleRemoveElement}
+            onSelectImage={handleSelectImage}
           />
         </WrapperRightClick>
       ))}

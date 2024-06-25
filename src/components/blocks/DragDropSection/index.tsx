@@ -34,6 +34,16 @@ const DragDropSection: React.FC<Props> = ({ listRows }) => {
     dispatch(addElementToColumn({ rowId, columnId, ele: element }))
   }
 
+  const handleSelectImage = (rowId: string, columnId: string, img: string) => {
+    const componentImage: ElementModel = {
+      name: 'image',
+      label: 'image',
+      value: img,
+      type: 'image'
+    }
+    dispatch(addElementToColumn({ rowId, columnId, ele: componentImage }))
+  }
+
   const handleDrag = (rowId: string, columnId: string, fromElement: string) => {
     if (fromElement === 'column') {
       setDragId({ rowId, columnId })
@@ -73,6 +83,7 @@ const DragDropSection: React.FC<Props> = ({ listRows }) => {
             onDrag={handleDrag}
             onDrop={handleDrop}
             onRemoveElement={handleRemoveElement}
+            onSelectImage={handleSelectImage}
           />
         </WrapperDragDropRow>
       ))}

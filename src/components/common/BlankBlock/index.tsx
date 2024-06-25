@@ -1,7 +1,7 @@
 import { CircleX } from 'lucide-react'
 import { useState } from 'react'
 
-import { cn } from 'src/shadcn/lib/utils'
+import { cn } from '@/lib/utils'
 import { ElementModel } from 'src/utils/models'
 import { LIST_ELEMENTS_EXAMPLE } from 'src/constants'
 
@@ -36,7 +36,6 @@ const BlankBlock: React.FC<Props> = ({ className = '', positionIndex, onRemoveOr
           >
             <CircleX className="text-red-600" />
           </button>
-          {/* <selectedElement.element /> */}
         </div>
       ) : (
         <div className="w-full min-h-[150px] border border-dashed border-indigo-500 rounded-md flex items-center justify-center">
