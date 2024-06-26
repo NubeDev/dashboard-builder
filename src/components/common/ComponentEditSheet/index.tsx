@@ -1,12 +1,15 @@
 import { useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { FastField, Form, Formik } from 'formik'
 
-import { Input } from '@/shadcn/components/input'
 import { Label } from '@/shadcn/components/label'
 import { Button } from '@/shadcn/components/button'
 import { DragItemModel } from '@/utils/models'
 import { changeComponentPropByColumnId } from '@/store/elements-layout'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/shadcn/components/sheet'
+
+import InputFormik from '@/components/formik/InputFormik'
+import TextareaFormik from '@/components/formik/TextareaFormik'
 
 type Props = {
   isShowSheet: boolean
@@ -19,20 +22,22 @@ const ComponentEditSheet = ({ isShowSheet, currentComponent, onChange }: Props) 
   const dispatch = useDispatch()
 
   // state
-  const [title, setTitle] = useState('')
+  const [propsSetting, setPropsSetting] = useState<Record<string, unknown>>({
+    title: '',
+    className: '',
+    paddingLeft: '',
+    paddingRight: '',
+    paddingTop: '',
+    paddingBottom: ''
+  })
 
-  // functions
-  const handleSaveChanges = () => {
-    const newComponent = { ...currentComponent, props: { ...currentComponent?.props, title } }
-    dispatch(changeComponentPropByColumnId(newComponent as DragItemModel))
-    onChange()
-    setTitle('')
-  }
-
-  // effect
   useEffect(() => {
-    if (currentComponent && currentComponent?.props?.title) {
-      setTitle(currentComponent?.props?.title)
+    if (currentComponent) {
+      setPropsSetting(prev => ({
+        ...prev,
+        ...(currentComponent?.props ? currentComponent.props : {}),
+        ...(currentComponent.props?.style ? currentComponent.props.style : {})
+      }))
     }
   }, [currentComponent])
 
@@ -43,25 +48,91 @@ const ComponentEditSheet = ({ isShowSheet, currentComponent, onChange }: Props) 
           <SheetTitle>Edit component</SheetTitle>
           <SheetDescription>Make changes to your component here. Click save when you're done.</SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="title" className="text-right">
-              Title
-            </Label>
-            <Input
-              id="title"
-              placeholder="Enter a title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-              className="col-span-3"
-            />
-          </div>
-        </div>
-        <div className="mt-10 text-right">
-          <Button type="button" onClick={handleSaveChanges}>
-            Save changes
-          </Button>
-        </div>
+        <Formik
+          initialValues={propsSetting}
+          onSubmit={values => {
+            const { title, className } = values
+            const newComponent = {
+              ...currentComponent,
+              props: {
+                ...currentComponent?.props,
+                title,
+                className,
+                style: {
+                  paddingLeft: values.paddingLeft,
+                  paddingRight: values.paddingRight,
+                  paddingTop: values.paddingTop,
+                  paddingBottom: values.paddingBottom
+                }
+              }
+            } as DragItemModel
+            dispatch(changeComponentPropByColumnId(newComponent as DragItemModel))
+            onChange()
+          }}
+          enableReinitialize
+        >
+          {() => {
+            return (
+              <Form className="w-full">
+                <div className="space-y-8">
+                  <div className="space-y-1">
+                    <Label>Title</Label>
+                    <FastField name="title" type="text" placeholder="Enter a title" component={InputFormik} />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Class Name</Label>
+                    <FastField
+                      name="className"
+                      placeholder="Enter tailwind css class (example: mx-2 p-4)"
+                      component={TextareaFormik}
+                    />
+                  </div>
+                  <div className="w-full grid grid-cols-2 gap-x-4 gap-y-6">
+                    <div className="space-y-1">
+                      <Label>Padding Left</Label>
+                      <FastField
+                        name="paddingLeft"
+                        type="text"
+                        placeholder="Padding left value (px)"
+                        component={InputFormik}
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label>Padding Right</Label>
+                      <FastField
+                        name="paddingRight"
+                        type="text"
+                        placeholder="Padding right value (px)"
+                        component={InputFormik}
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label>Padding Top</Label>
+                      <FastField
+                        name="paddingTop"
+                        type="text"
+                        placeholder="Padding top value (px)"
+                        component={InputFormik}
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label>Padding Bottom</Label>
+                      <FastField
+                        name="paddingBottom"
+                        type="text"
+                        placeholder="Padding bottom value (px)"
+                        component={InputFormik}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <Button type="submit">Save changes</Button>
+                  </div>
+                </div>
+              </Form>
+            )
+          }}
+        </Formik>
       </SheetContent>
     </Sheet>
   )

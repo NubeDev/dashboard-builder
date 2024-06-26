@@ -10,7 +10,7 @@ export default defineConfig({
     federation({
       name: 'pageBuilder',
       remotes: {
-        pageBuilder: 'http://localhost:5173/assets/remoteEntry.js'
+        pageBuilder: 'https://page-builder-io.netlify.app/assets/remoteEntry.js'
       },
       shared: ['react', 'react-dom', 'jotai', 'tldraw']
     })

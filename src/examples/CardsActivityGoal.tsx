@@ -5,9 +5,11 @@ import * as React from 'react'
 import { Bar, BarChart, ResponsiveContainer } from 'recharts'
 import { Button } from '@/shadcn/components/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shadcn/components/card'
+import { cn } from '@/lib/utils'
 
 type Props = {
   title?: string
+  className?: string
 }
 
 const data = [
@@ -52,7 +54,7 @@ const data = [
   }
 ]
 
-const CardsActivityGoal = ({ title }: Props) => {
+const CardsActivityGoal = ({ title, className }: Props) => {
   const [goal, setGoal] = React.useState(350)
 
   function onClick(adjustment: number) {
@@ -60,7 +62,7 @@ const CardsActivityGoal = ({ title }: Props) => {
   }
 
   return (
-    <Card>
+    <Card className={cn('', className)}>
       <CardHeader className="pb-4">
         <CardTitle className="text-base">{title ? title : 'Move Goal'}</CardTitle>
         <CardDescription>Set your daily activity goal.</CardDescription>
