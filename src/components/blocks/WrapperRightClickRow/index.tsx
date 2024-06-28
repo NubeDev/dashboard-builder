@@ -1,10 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { ClipboardPaste, CopyPlus, FilePenLine, Folders, Redo2, Trash2, Undo2 } from 'lucide-react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { RowModel } from '@/utils/models'
-import { RootState } from '@/store/store'
-import { addRowByCopy, redo, removeRow, undo } from '@/store/elements-layout'
-import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from '@/store/temp-list-components'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -12,6 +8,9 @@ import {
   ContextMenuShortcut,
   ContextMenuTrigger
 } from '@/shadcn/components/context-menu'
+import { addRowByCopy, redo, removeRow, undo } from '@/store/elements-layout'
+import { RootState } from '@/store/store'
+import { RowModel } from '@/utils/models'
 
 interface Props {
   children: React.ReactElement
@@ -23,27 +22,26 @@ const WrapperRightClickRow = ({ children, currentRow, onEdit }: Props) => {
   // const
   const dispatch = useDispatch()
   const tempComponents = useSelector((state: RootState) => state.tempListComponents.listTempComponents)
-  const disabledPaste = tempComponents.find(t => t.type === 'copy' && t.from === 'row') ? false : true
+  const disabledPaste = tempComponents
 
   // functions
   const handleCopyRow = () => {
-    const tempCopyRow: TempComponentsModel = {
-      id: currentRow.id,
-      rowId: currentRow.id,
-      type: 'copy',
-      time: new Date().toISOString(),
-      from: 'row'
-    }
-    dispatch(addCopyToTempList(tempCopyRow))
+    // const tempCopyRow: TempComponentsModel = {
+    //   id: currentRow.id,
+    //   rowId: currentRow.id,
+    //   type: 'copy',
+    //   time: new Date().toISOString(),
+    //   from: 'row'
+    // }
+    // dispatch(addCopyToTempList(tempCopyRow))
   }
 
   const handlePasteRow = () => {
-    const copyRow = tempComponents.find(t => t.type === 'copy' && t.from === 'row')
-
-    if (copyRow) {
-      dispatch(addRowByCopy({ rowId: currentRow.id, copyRowId: copyRow.rowId }))
-      dispatch(removeCopyFromTempList())
-    }
+    // const copyRow = tempComponents.find(t => t.type === 'copy' && t.from === 'row')
+    // if (copyRow) {
+    //   dispatch(addRowByCopy({ rowId: currentRow.id, copyRowId: copyRow.rowId }))
+    //   dispatch(removeCopyFromTempList())
+    // }
   }
 
   const handleDeleteRow = () => {
@@ -78,7 +76,7 @@ const WrapperRightClickRow = ({ children, currentRow, onEdit }: Props) => {
             <Folders className="size-4" />
           </ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem disabled={disabledPaste} onSelect={handlePasteRow}>
+        <ContextMenuItem disabled={!!disabledPaste} onSelect={handlePasteRow}>
           Paste
           <ContextMenuShortcut>
             <ClipboardPaste className="size-4" />

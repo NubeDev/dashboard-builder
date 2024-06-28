@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { DragItemModel, ElementModel, RowModel } from '@/utils/models'
+import { DragItemModel, ElementModel, OutputPageBuilderModel, RowModel } from '@/utils/models'
 import {
   addColumnToRow,
   addElementToColumn,
@@ -34,12 +34,13 @@ const DragDropSection: React.FC<Props> = ({ listRows }) => {
     dispatch(addElementToColumn({ rowId, columnId, ele: element }))
   }
 
-  const handleSelectImage = (rowId: string, columnId: string, img: string) => {
+  const handleSelectImage = (rowId: string, columnId: string, img: OutputPageBuilderModel) => {
     const componentImage: ElementModel = {
       name: 'image',
       label: 'image',
-      value: img,
-      type: 'image'
+      value: img.url,
+      type: 'image',
+      pageBuilderId: img.id
     }
     dispatch(addElementToColumn({ rowId, columnId, ele: componentImage }))
   }

@@ -1,19 +1,22 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { RootState } from '@/store/store'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shadcn/components/dialog'
 import { setCurrentEditComponent } from '@/store/current-edit-component'
-import { DragItemModel, ElementModel, RowModel } from '@/utils/models'
 import { addElementToColumn, removeElementFromColumn } from '@/store/elements-layout'
-import { TempComponentsModel, addCopyToTempList, removeCopyFromTempList } from '@/store/temp-list-components'
+import { RootState } from '@/store/store'
+import { DragItemModel, ElementModel, OutputPageBuilderModel, RowModel } from '@/utils/models'
 
 import DragDropItem from '../DragAndDrop/DragDropItem'
+import EditGrapicsBuilder from '../PageBuilder/EditGrapicsBuilder'
 import WrapperRightClick from './WrapperRightClick'
+import { addToTempList, removeCopyFromTempList } from '@/store/temp-list-components'
 
 type Props = {
   items: DragItemModel[]
   row: RowModel
   onSelectElement: (columnId: string, element: ElementModel) => void
-  onSelectImage: (columdId: string, img: string) => void
+  onSelectImage: (columdId: string, out: OutputPageBuilderModel) => void
   onDrag: (columnId: string) => void
   onDrop: (columnId: string) => void
   onRemove: (columnId: string) => void
@@ -31,6 +34,9 @@ const WrapperColumnInRow: React.FC<Props> = ({
   // const
   const dispatch = useDispatch()
   const tempComponents = useSelector((state: RootState) => state.tempListComponents.listTempComponents)
+
+  // state
+  const [editGrapicsBuilder, setEditGrapicsBuilder] = useState<DragItemModel | null>(null)
 
   // functions
   const handleDrag = (id: string) => {
@@ -51,33 +57,21 @@ const WrapperColumnInRow: React.FC<Props> = ({
 
   function handleCopyColumn(d: DragItemModel, action: string) {
     if (action === 'copy') {
-      const tempCopyElement: TempComponentsModel = {
-        id: d.id,
-        columnId: d.id,
-        type: 'copy',
-        rowId: row.id,
-        from: 'column',
-        time: new Date().toISOString(),
-        component: d.component,
-        componentName: d.name
-      }
-      dispatch(addCopyToTempList(tempCopyElement))
+      dispatch(addToTempList(d.componentName || ''))
     }
   }
 
   function handlePaste(d: DragItemModel) {
-    const copyComponent = tempComponents.find(t => t.type === 'copy' && t.from === 'column')
-
+    const copyComponent = tempComponents
     if (copyComponent) {
       const tempElementCopy: ElementModel = {
         name: d.name || '',
         label: d.name || '',
-        value: d.name || ''
+        value: copyComponent,
+        pageBuilderId: d.pageBuilderId
       }
-
       dispatch(addElementToColumn({ rowId: row.id, columnId: d.id, ele: tempElementCopy }))
     }
-
     dispatch(removeCopyFromTempList())
   }
 
@@ -86,14 +80,18 @@ const WrapperColumnInRow: React.FC<Props> = ({
   }
 
   function handleEdit(d: DragItemModel) {
+    if (d.type === 'image') {
+      setEditGrapicsBuilder(d)
+      return
+    }
     dispatch(setCurrentEditComponent(d))
   }
 
-  const handleSelectImage = (img: string, id: string) => {
-    onSelectImage(id, img)
+  const handleSelectImage = (out: OutputPageBuilderModel, id: string) => {
+    onSelectImage(id, out)
   }
 
-  const isExistCopyComponent = tempComponents.some(e => e.type === 'copy')
+  const isExistCopyComponent = tempComponents
 
   return (
     <div className="w-full flex gap-9 justify-between relative">
@@ -119,6 +117,19 @@ const WrapperColumnInRow: React.FC<Props> = ({
           />
         </WrapperRightClick>
       ))}
+
+      <Dialog open={!!editGrapicsBuilder} onOpenChange={() => setEditGrapicsBuilder(null)}>
+        <DialogContent className="max-w-[calc(100vw-100px)] w-full h-[80vh] mx-auto z-[99999999]">
+          <DialogHeader>
+            <DialogTitle>Page Builder</DialogTitle>
+          </DialogHeader>
+          <EditGrapicsBuilder
+            grapicsBuilder={editGrapicsBuilder}
+            onSaveEditImage={handleSelectImage}
+            onClose={() => setEditGrapicsBuilder(null)}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

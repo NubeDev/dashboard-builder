@@ -4,7 +4,7 @@ import { CircleX } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getComponentByName } from '@/utils'
 import { LIST_ELEMENTS_EXAMPLE } from '@/constants'
-import { DragItemModel, ElementModel } from '@/utils/models'
+import { DragItemModel, ElementModel, OutputPageBuilderModel } from '@/utils/models'
 
 import PlusElement from '@/components/common/BlankBlock/PlusElement'
 
@@ -12,7 +12,7 @@ type Props = {
   item: DragItemModel
   className?: string
   onSelectedElement: (element: ElementModel, id: string) => void
-  onSelectImage: (img: string, id: string) => void
+  onSelectImage: (out: OutputPageBuilderModel, id: string) => void
   onRemoveElement: (id: string) => void
   onDragStart: (id: string) => void
   onDropEnd: (id: string) => void
@@ -45,8 +45,8 @@ const DragDropItem: React.FC<Props> = ({
     onSelectedElement(element, item.id)
   }
 
-  const handleSelectImage = (img: string) => {
-    onSelectImage(img, item.id)
+  const handleSelectImage = (out: OutputPageBuilderModel) => {
+    onSelectImage(out, item.id)
   }
 
   const currentComponent = useMemo(() => {

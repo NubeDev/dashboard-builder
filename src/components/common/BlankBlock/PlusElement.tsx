@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SquarePlus } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { ElementModel } from '@/utils/models'
+import { ElementModel, OutputPageBuilderModel } from '@/utils/models'
 import { buttonVariants } from '@/shadcn/components/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shadcn/components/dialog'
 
@@ -11,7 +11,7 @@ import PageBuilder from '@/components/blocks/PageBuilder'
 type Props = {
   listElements: ElementModel[]
   handleSelectElement: (element: ElementModel) => void
-  handleSelectImage?: (img: string) => void
+  handleSelectImage?: (out: OutputPageBuilderModel) => void
 }
 
 const PlusElement: React.FC<Props> = ({ listElements, handleSelectElement, handleSelectImage }) => {
@@ -27,8 +27,8 @@ const PlusElement: React.FC<Props> = ({ listElements, handleSelectElement, handl
     setOpenPageBuilder(true)
   }
 
-  const handleSaveImage = (img: string) => {
-    handleSelectImage && handleSelectImage(img)
+  const handleSaveImage = (out: OutputPageBuilderModel) => {
+    handleSelectImage && handleSelectImage(out)
   }
 
   return (

@@ -6,6 +6,7 @@ export interface ElementModel {
   value: string
   icon?: LucideIcon
   type?: 'component' | 'image'
+  pageBuilderId?: string
 }
 
 export interface SelectedElementModel extends ElementModel {
@@ -21,6 +22,7 @@ export interface DragItemModel {
   componentName?: string
   props?: Record<string, unknown>
   type?: 'component' | 'image'
+  pageBuilderId?: string
 }
 
 export interface RowLayoutModel {
@@ -57,4 +59,9 @@ export interface LayoutState {
 export interface UndoRedoStateModel {
   pastLayouts: RowModel[][]
   futureLayouts: RowModel[][]
+}
+
+export interface OutputPageBuilderModel {
+  id: string
+  url: string
 }

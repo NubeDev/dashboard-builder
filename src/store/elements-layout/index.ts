@@ -49,7 +49,9 @@ export const elementsLayoutSlice = createSlice({
           ? {
               ...row,
               column: row.column.map(col =>
-                col.id === columnId ? { ...col, componentName: ele.value, type: ele.type } : col
+                col.id === columnId
+                  ? { ...col, componentName: ele.value, type: ele.type, pageBuilderId: ele.pageBuilderId }
+                  : col
               )
             }
           : row

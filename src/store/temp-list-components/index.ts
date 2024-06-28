@@ -3,42 +3,29 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface TempComponentsModel {
-  id: string
-  type: 'undo' | 'redo' | 'copy'
-  rowId: string
-  columnId?: string
-  elementId?: string
-  time: string
-  from: string
-  componentName?: string
-  component?: () => JSX.Element
+  componentName: string
 }
 
 interface TempListComponentsState {
-  listTempComponents: TempComponentsModel[]
+  listTempComponents: string
 }
 
 const initialState: TempListComponentsState = {
-  listTempComponents: []
+  listTempComponents: ''
 }
 
 export const tempListComponentsSlice = createSlice({
   name: 'tempListComponents',
   initialState,
   reducers: {
-    addToTempList: (state, action: PayloadAction<TempComponentsModel>) => {
-      state.listTempComponents.push(action.payload)
-    },
-    addCopyToTempList: (state, action: PayloadAction<TempComponentsModel>) => {
-      const tempList = state.listTempComponents.filter(l => l.type !== 'copy')
-      const newTempList = [...tempList, action.payload]
-      state.listTempComponents = newTempList
+    addToTempList: (state, action: PayloadAction<string>) => {
+      state.listTempComponents = action.payload
     },
     removeCopyFromTempList: state => {
-      state.listTempComponents = state.listTempComponents.filter(l => l.type !== 'copy')
+      state.listTempComponents = ''
     }
   }
 })
 
-export const { addCopyToTempList, removeCopyFromTempList } = tempListComponentsSlice.actions
+export const { removeCopyFromTempList, addToTempList } = tempListComponentsSlice.actions
 export default tempListComponentsSlice.reducer

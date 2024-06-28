@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { LIST_ROW_LAYOUTS } from '@/constants'
-import { DragItemModel, ElementModel, RowModel } from '@/utils/models'
+import { DragItemModel, ElementModel, OutputPageBuilderModel, RowModel } from '@/utils/models'
 
 import EditRowPopup from './EditRowPopup'
 import SelectLayoutButton from '../DragAndDrop/SelectLayoutButton'
@@ -13,7 +13,7 @@ type Props = {
   rowItem: RowModel
   onAdColumn: (id: string, listColumn: DragItemModel[], currentLayout: string) => void
   onSelectElement: (rowId: string, columnId: string, element: ElementModel) => void
-  onSelectImage: (rowId: string, columnId: string, img: string) => void
+  onSelectImage: (rowId: string, columnId: string, img: OutputPageBuilderModel) => void
   onDrag: (rowId: string, columnId: string, fromElement: string) => void
   onDrop: (rowId: string, columnId: string) => void
   onRemoveElement: (rowId: string, columnId: string) => void
@@ -41,8 +41,8 @@ const Row: React.FC<Props> = ({
     onSelectElement(rowItem.id, columnId, element)
   }
 
-  const handleSelectImage = (columnId: string, img: string) => {
-    onSelectImage(rowItem.id, columnId, img)
+  const handleSelectImage = (columnId: string, out: OutputPageBuilderModel) => {
+    onSelectImage(rowItem.id, columnId, out)
   }
 
   const handleDrag = (columnId: string) => {
